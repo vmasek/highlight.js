@@ -170,7 +170,7 @@ declare module 'highlight.js' {
         keywords?: Record<string, any> | string
         isCompiled?: boolean,
         exports?: any,
-        classNameAliases?: Record<string, string>
+        scopeAliases?: Record<string, string>
         compilerExtensions?: CompilerExt[]
         supersetOf?: string
     }
