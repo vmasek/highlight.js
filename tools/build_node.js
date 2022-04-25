@@ -145,7 +145,7 @@ const CORE_FILES = [
 
 async function buildNode(options) {
   mkdir("lib/languages");
-  mkdir("styles/base16");
+  mkdir("themes/base16");
   mkdir("types");
 
 
@@ -161,17 +161,16 @@ async function buildNode(options) {
     install("./src/core.d.ts", "es/common.d.ts");
   }
 
-  log("Writing styles.");
-  // const styles = await fs.readdir("./src/styles/");
-  glob.sync("**", { cwd: "./src/styles" }).forEach((file) => {
-    const stat = fss.statSync(`./src/styles/${file}`);
+  log("Writing themes.");
+  glob.sync("**", { cwd: "./src/themes" }).forEach((file) => {
+    const stat = fss.statSync(`./src/themes/${file}`);
     if (stat.isDirectory()) return;
 
     if (file.endsWith(".css")) {
-      installCleanCSS(`./src/styles/${file}`, `styles/${file}`);
+      installCleanCSS(`./src/themes/${file}`, `themes/${file}`);
     } else {
       // images, etc.
-      install(`./src/styles/${file}`, `styles/${file}`);
+      install(`./src/themes/${file}`, `themes/${file}`);
     }
   });
 
