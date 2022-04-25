@@ -107,7 +107,6 @@ const generatePackageExports = () => ({
   "./lib/common": dual("./lib/common.js"),
   "./lib/core": dual("./lib/core.js"),
   "./lib/languages/*": dual("./lib/languages/*.js"),
-  "./scss/*": "./scss/*",
   "./styles/*": "./styles/*",
   "./types/*": "./types/*"
 });
@@ -146,7 +145,6 @@ const CORE_FILES = [
 
 async function buildNode(options) {
   mkdir("lib/languages");
-  mkdir("scss/base16");
   mkdir("styles/base16");
   mkdir("types");
 
@@ -171,7 +169,6 @@ async function buildNode(options) {
 
     if (file.endsWith(".css")) {
       installCleanCSS(`./src/styles/${file}`, `styles/${file}`);
-      installCleanCSS(`./src/styles/${file}`, `scss/${file.replace(".css", ".scss")}`);
     } else {
       // images, etc.
       install(`./src/styles/${file}`, `styles/${file}`);
