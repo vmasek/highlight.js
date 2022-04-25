@@ -44,6 +44,7 @@
     "build-browser": "node ./tools/build.js -t browser :common",
     "test": "mocha test",
     "test-markup": "mocha test/markup",
+    "test-api": "mocha test/api",
     "test-detect": "mocha test/detect",
     "test-browser": "mocha test/browser",
     "test-parser": "mocha test/parser"
