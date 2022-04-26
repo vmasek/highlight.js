@@ -48,12 +48,10 @@ export default function(hljs) {
   const ATTRS = {
     begin: /[a-zA-Z0-9-_]+(\s*=)/,
     returnBegin: true,
-    relevance: 0,
     contains: [
       {
         className: 'attr',
-        begin: /\S+/,
-        relevance: 0.2
+        begin: /\S+/
       }
     ]
   };

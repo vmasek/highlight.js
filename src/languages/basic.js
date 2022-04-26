@@ -198,7 +198,7 @@ export default function(hljs) {
     },
     contains: [
       hljs.QUOTE_STRING_MODE,
-      hljs.COMMENT(/REM(?=\s)/, /$/, { relevance: 2 }),
+      hljs.COMMENT(/REM(?=\s)/, /$/, { relevance: "double" }),
       hljs.COMMENT(/'/, /$/, { relevance: 0 }),
       {
         // Match line numbers
@@ -214,12 +214,14 @@ export default function(hljs) {
       {
         // Match hexadecimal numbers (&Hxxxx)
         className: 'number',
-        begin: '(&[hH][0-9a-fA-F]{1,4})'
+        begin: '(&[hH][0-9a-fA-F]{1,4})',
+        relevance: "low"
       },
       {
         // Match octal numbers (&Oxxxxxx)
         className: 'number',
-        begin: '(&[oO][0-7]{1,6})'
+        begin: '(&[oO][0-7]{1,6})',
+        relevance: "low"
       }
     ]
   };

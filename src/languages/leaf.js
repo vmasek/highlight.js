@@ -11,7 +11,6 @@ export default function(hljs) {
     disableAutodetect: true,
     contains: [
       {
-        className: 'function',
         begin: '#+' + '[A-Za-z_0-9]*' + '\\(',
         end: / \{/,
         returnBegin: true,
@@ -22,11 +21,10 @@ export default function(hljs) {
             begin: '#+'
           },
           {
-            className: 'title',
+            className: 'title.function',
             begin: '[A-Za-z_][A-Za-z_0-9]*'
           },
           {
-            className: 'params',
             begin: '\\(',
             end: '\\)',
             endsParent: true,

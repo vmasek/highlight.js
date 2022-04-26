@@ -160,18 +160,21 @@ export default function(hljs) {
   };
   const NUMBER = {
     className: 'number',
-    relevance: 0,
+    relevance: "low",
     // Source: https://www.freepascal.org/docs-html/ref/refse6.html
     variants: [
       {
         // Hexadecimal notation, e.g., $7F.
-        begin: '\\$[0-9A-Fa-f]+' },
+        begin: '\\$[0-9A-Fa-f]+'
+      },
       {
         // Octal notation, e.g., &42.
-        begin: '&[0-7]+' },
+        begin: '&[0-7]+' 
+      },
       {
         // Binary notation, e.g., %1010.
-        begin: '%[01]+' }
+        begin: '%[01]+' 
+      }
     ]
   };
   const CHAR_STRING = {
@@ -187,7 +190,7 @@ export default function(hljs) {
     className: 'function',
     beginKeywords: 'function constructor destructor procedure',
     end: /[:;]/,
-    keywords: 'function constructor|10 destructor|10 procedure|10',
+    keywords: 'function constructor destructor|2 procedure',
     contains: [
       hljs.TITLE_MODE,
       {

@@ -43,7 +43,7 @@ export default function(hljs) {
         className: 'string',
         begin: '"""',
         end: '"""',
-        relevance: 2
+        relevance: "double"
       },
       hljs.APOS_STRING_MODE,
       hljs.QUOTE_STRING_MODE,

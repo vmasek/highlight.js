@@ -77,8 +77,7 @@ export default function(hljs) {
       {
         className: 'string',
         begin: '\'',
-        end: '[^\\\\]\'',
-        relevance: 0
+        end: '[^\\\\]\''
       },
       {
         className: 'title',
@@ -89,17 +88,17 @@ export default function(hljs) {
       },
       {
         className: 'number',
+        relevance: 0,
         variants: [
           { // hex
-            begin: '[#$=]?0x[0-9a-f]+' },
+            begin: '[#$=]?0x[0-9a-f]+', relevance: "low" },
           { // bin
-            begin: '[#$=]?0b[01]+' },
+            begin: '[#$=]?0b[01]+', relevance: "low" },
           { // literal
             begin: '[#$=]\\d+' },
           { // bare number
             begin: '\\b\\d+' }
-        ],
-        relevance: 0
+        ]
       },
       {
         className: 'symbol',
