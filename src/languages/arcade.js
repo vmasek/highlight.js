@@ -231,7 +231,7 @@ export default function(hljs) {
   const SYMBOL = {
     className: 'symbol',
     relevance: 1,
-    begin: '\\$[datastore|feature|layer|map|measure|sourcefeature|sourcelayer|targetfeature|targetlayer|value|view]+'
+    begin: '\\$(datastore|feature|layer|map|measure|sourcefeature|sourcelayer|targetfeature|targetlayer|value|view)+'
   };
   const NUMBER = {
     className: 'number',
