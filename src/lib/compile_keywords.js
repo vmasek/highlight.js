@@ -13,7 +13,8 @@ const COMMON_KEYWORDS = [
   'value', // common variable name
   'it',
   'is',
-  'at'
+  'at',
+  '_' // lots of languages have a _ keyword for some reason
 ];
 
 const DEFAULT_KEYWORD_SCOPE = "keyword";
