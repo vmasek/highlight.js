@@ -64,7 +64,7 @@ export default function(hljs) {
             begin: '\\.\\w*'
           },
           // PROCEDURE NAME | PB IDE color: #006666 (Blue Stone)
-          hljs.inhert(hljs.UNDERSCORE_TITLE_MODE , { scope: "title.function" })
+          hljs.inherit(hljs.UNDERSCORE_TITLE_MODE , { scope: "title.function" })
         ]
       },
       STRINGS,

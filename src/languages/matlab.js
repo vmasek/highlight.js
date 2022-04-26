@@ -99,7 +99,7 @@ export default function(hljs) {
         contains: [ { begin: '""' } ],
         starts: TRANSPOSE
       },
-      hljs.COMMENT(/^\s*%\{\s*$', '^\s*%\}\s*$/),
+      hljs.COMMENT(/^\s*%\{\s*$/, /^\s*%\}\s*$/),
       hljs.COMMENT(/%/, /$/, { relevance: 0 })
     ]
   };

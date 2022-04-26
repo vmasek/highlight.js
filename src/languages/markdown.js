@@ -75,7 +75,6 @@ export default function(hljs) {
   };
   const URL_SCHEME = /[A-Za-z][A-Za-z0-9+.-]*/;
   const LINK = {
-    scope: "booger",
     variants: [
       // popular internet URLs
       {

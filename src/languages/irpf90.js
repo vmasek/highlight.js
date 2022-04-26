@@ -86,7 +86,7 @@ export default function(hljs) {
         beginKeywords: 'subroutine function program',
         illegal: '[${=\\n]',
         contains: [
-          hljs.inhert(hljs.UNDERSCORE_TITLE_MODE, {scope: "title.function" }),
+          hljs.inherit(hljs.UNDERSCORE_TITLE_MODE, {scope: "title.function" }),
           PARAMS
         ]
       },

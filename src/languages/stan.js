@@ -419,8 +419,7 @@ export default function(hljs) {
       },
       {
         scope: 'keyword',
-        match: /\btarget(?=\s*\+=)/,
-        keywords: "target"
+        match: /\btarget(?=\s*\+=)/
       },
       {
         // highlights the 'T' in T[,] for only Stan language distributrions

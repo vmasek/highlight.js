@@ -44,7 +44,7 @@ export default function(hljs) {
         beginKeywords: 'function',
         end: '$',
         contains: [
-          hljs.inhert(hljs.UNDERSCORE_TITLE_MODE, { scope: "title.function" }),
+          hljs.inherit(hljs.UNDERSCORE_TITLE_MODE, { scope: "title.function" }),
           {
             className: 'params',
             begin: '\\(',

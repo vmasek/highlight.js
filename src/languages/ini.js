@@ -96,9 +96,9 @@ export default function(hljs) {
       COMMENTS,
       {
         className: 'section',
-        relevance: 1,
+        relevance: "keyword",
         begin: /^\[+/,
-        end: /\]+$/
+        end: /\]+(?=\s*($|;))/
       },
       {
         begin: DOTTED_KEY,
