@@ -86,6 +86,8 @@ export default function(hljs) {
 
   return {
     name: 'Prolog',
+    // not enough signal/keywords
+    disableAutodetect: true,
     contains: inner.concat([
       { // relevance booster
         begin: /\.$/ }

@@ -181,7 +181,6 @@ export default function(hljs) {
       hljs.QUOTE_STRING_MODE,
       hljs.NUMBER_MODE,
       hljs.REGEXP_MODE
-
     ]
   };
 }

@@ -27,7 +27,8 @@ export default function(hljs) {
       "thisContext"
     ],
     contains: [
-      hljs.COMMENT('"', '"'),
+      // relevance must be lowered so this doesn't compete with strings
+      hljs.COMMENT('"', '"', { relevance: 0.1 }),
       hljs.APOS_STRING_MODE,
       {
         className: 'type',

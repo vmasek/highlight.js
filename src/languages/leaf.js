@@ -7,6 +7,8 @@ Description: Based on the Leaf reference from https://vapor.github.io/documentat
 export default function(hljs) {
   return {
     name: 'Leaf',
+    // not enough signal
+    disableAutodetect: true,
     contains: [
       {
         className: 'function',

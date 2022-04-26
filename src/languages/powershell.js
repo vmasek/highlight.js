@@ -79,6 +79,7 @@ export default function(hljs) {
       { begin: /\$\B/ },
       {
         className: 'keyword',
+        relevance: 1,
         begin: /\$this/
       },
       { begin: /\$[\w\d][\w\d_:]*/ }
@@ -87,6 +88,7 @@ export default function(hljs) {
 
   const LITERAL = {
     className: 'literal',
+    relevance: 1,
     begin: /\$(null|true|false)\b/
   };
 
@@ -129,6 +131,7 @@ export default function(hljs) {
 
   const PS_HELPTAGS = {
     className: "doctag",
+    relevance: 0.5,
     variants: [
       /* no paramater help tags */
       { begin: /\.(synopsis|description|example|inputs|outputs|notes|link|component|role|functionality)/ },
@@ -158,6 +161,7 @@ export default function(hljs) {
 
   const CMDLETS = {
     className: 'built_in',
+    relevance: 1,
     variants: [ { begin: '('.concat(VALID_VERBS, ')+(-)[\\w\\d]+') } ]
   };
 
@@ -180,7 +184,7 @@ export default function(hljs) {
     contains: [
       {
         begin: "function",
-        relevance: 0,
+        relevance: 1,
         className: "keyword"
       },
       {
@@ -203,12 +207,14 @@ export default function(hljs) {
   const PS_USING = {
     begin: /using\s/,
     end: /$/,
+    relevance: 1,
     returnBegin: true,
     contains: [
       QUOTE_STRING,
       APOS_STRING,
       {
         className: 'keyword',
+        relevance: 1,
         begin: /(using|assembly|command|module|namespace|type)/
       }
     ]
@@ -219,6 +225,7 @@ export default function(hljs) {
     // PS literals are pretty verbose so it's a good idea to accent them a bit.
     {
       className: 'operator',
+      relevance: 1,
       begin: '('.concat(COMPARISON_OPERATORS, ')\\b')
     },
     {
@@ -251,12 +258,12 @@ export default function(hljs) {
   const PS_NEW_OBJECT_TYPE = {
     className: 'built_in',
     begin: /New-Object\s+\w/,
+    relevance: 1,
     end: /$/,
     returnBegin: true,
     contains: [
       {
-        begin: /New-Object\s+/,
-        relevance: 0
+        begin: /New-Object\s+/
       },
       {
         className: 'meta',
@@ -273,7 +280,6 @@ export default function(hljs) {
     begin: /\[.*\]\s*[\w]+[ ]??\(/,
     end: /$/,
     returnBegin: true,
-    relevance: 0,
     contains: [
       {
         className: 'keyword',
@@ -281,7 +287,7 @@ export default function(hljs) {
           KEYWORDS.keyword.toString().replace(/\s/g, '|'
           ), ')\\b'),
         endsParent: true,
-        relevance: 0
+        relevance: 1
       },
       hljs.inherit(hljs.TITLE_MODE, { endsParent: true })
     ]
@@ -307,19 +313,17 @@ export default function(hljs) {
     end: /\]/,
     excludeBegin: true,
     excludeEnd: true,
-    relevance: 0,
     contains: [].concat(
       'self',
       GENTLEMANS_SET,
       {
         begin: "(" + TYPES.join("|") + ")",
-        className: "built_in",
-        relevance: 0
+        relevance: 1,
+        className: "built_in"
       },
       {
         className: 'type',
-        begin: /[\.\w\d]+/,
-        relevance: 0
+        begin: /[\.\w\d]+/
       }
     )
   };

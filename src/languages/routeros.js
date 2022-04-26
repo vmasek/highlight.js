@@ -118,6 +118,7 @@ export default function(hljs) {
               VAR,
               {
                 className: 'literal',
+                relevance: 1,
                 begin: '\\b(' + LITERALS.split(' ').join('|') + ')\\b'
               },
               {
@@ -150,6 +151,7 @@ export default function(hljs) {
       },
       {
         begin: '\\b(' + COMMON_COMMANDS.split(' ').join('|') + ')([\\s[(\\]|])',
+        relevance: 1,
         returnBegin: true,
         contains: [
           {
@@ -161,7 +163,7 @@ export default function(hljs) {
       {
         className: 'built_in',
         variants: [
-          { begin: '(\\.\\./|/|\\s)((' + OBJECTS.split(' ').join('|') + ');?\\s)+' },
+          { begin: '(\\.\\./|/|\\s)((' + OBJECTS.split(' ').join('|') + ');?\\s)+', relevance: 1 },
           {
             begin: /\.\./,
             relevance: 0

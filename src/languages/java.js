@@ -171,6 +171,7 @@ export default function(hljs) {
           /\s+/,
           JAVA_IDENT_RE
         ],
+        relevance: 1, // keyword
         className: {
           1: "keyword",
           3: "title.class"
@@ -179,7 +180,8 @@ export default function(hljs) {
       {
         // Exceptions for hyphenated keywords
         match: /non-sealed/,
-        scope: "keyword"
+        scope: "keyword",
+        relevance: 1
       },
       {
         begin: [
@@ -201,6 +203,7 @@ export default function(hljs) {
           /\s+/,
           JAVA_IDENT_RE
         ],
+        relevance: 1, // record
         className: {
           1: "keyword",
           3: "title.class"

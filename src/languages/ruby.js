@@ -262,6 +262,7 @@ export default function(hljs) {
       /def/, /\s+/,
       RUBY_METHOD_RE
     ],
+    relevance: 1,
     scope: {
       1: "keyword",
       3: "title.function"

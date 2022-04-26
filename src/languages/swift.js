@@ -38,6 +38,7 @@ export default function(hljs) {
       /\./,
       either(...Swift.dotKeywords, ...Swift.optionalDotKeywords)
     ],
+    relevance: 1,
     className: { 2: "keyword" }
   };
   const KEYWORD_GUARD = {
@@ -55,6 +56,7 @@ export default function(hljs) {
   const KEYWORD = { variants: [
     {
       className: 'keyword',
+      relevance: 1,
       match: either(...REGEX_KEYWORDS, ...Swift.optionalDotKeywords)
     }
   ] };
@@ -82,6 +84,7 @@ export default function(hljs) {
   };
   const BUILT_IN = {
     className: 'built_in',
+    relevance: 1,
     match: concat(/\b/, either(...Swift.builtIns), /(?=\()/)
   };
   const BUILT_INS = [
@@ -200,6 +203,7 @@ export default function(hljs) {
   const AVAILABLE_ATTRIBUTE = {
     match: /(@|#(un)?)available/,
     className: "keyword",
+    relevance: 1,
     starts: { contains: [
       {
         begin: /\(/,
@@ -215,6 +219,7 @@ export default function(hljs) {
   };
   const KEYWORD_ATTRIBUTE = {
     className: 'keyword',
+    relevance: 1,
     match: concat(/@/, either(...Swift.keywordAttributes))
   };
   const USER_DEFINED_ATTRIBUTE = {
@@ -234,6 +239,7 @@ export default function(hljs) {
     contains: [
       { // Common Apple frameworks, for relevance boost
         className: 'type',
+        relevance: 2,
         match: concat(/(AV|CA|CF|CG|CI|CL|CM|CN|CT|MK|MP|MTK|MTL|NS|SCN|SK|UI|WK|XC)/, Swift.identifierCharacter, '+')
       },
       { // Type identifier
@@ -348,6 +354,7 @@ export default function(hljs) {
       /\s+/,
       either(QUOTED_IDENTIFIER.match, Swift.identifier, Swift.operator)
     ],
+    relevance: 1,
     className: {
       1: "keyword",
       3: "title.function"
@@ -370,6 +377,7 @@ export default function(hljs) {
       /\b(?:subscript|init[?!]?)/,
       /\s*(?=[<(])/,
     ],
+    relevance: 1,
     className: { 1: "keyword" },
     contains: [
       GENERIC_PARAMETERS,
@@ -385,6 +393,7 @@ export default function(hljs) {
       /\s+/,
       Swift.operator
     ],
+    relevance: 1,
     className: {
       1: "keyword",
       3: "title"
@@ -398,6 +407,7 @@ export default function(hljs) {
       /\s+/,
       Swift.typeIdentifier
     ],
+    relevance: 1,
     className: {
       1: "keyword",
       3: "title"
