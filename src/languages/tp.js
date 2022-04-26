@@ -16,6 +16,7 @@ export default function(hljs) {
   };
   const TPDATA = {
     className: 'built_in',
+    relevance: "keyword",
     begin: '(AR|P|PAYLOAD|PR|R|SR|RSR|LBL|VR|UALM|MESSAGE|UTOOL|UFRAME|TIMER|'
     + 'TIMER_OVERFLOW|JOINT_MAX_SPEED|RESUME_PROG|DIAG_REC)\\[',
     end: '\\]',
@@ -28,6 +29,7 @@ export default function(hljs) {
   const TPIO = {
     className: 'built_in',
     begin: '(AI|AO|DI|DO|F|RI|RO|UI|UO|GI|GO|SI|SO)\\[',
+    relevance: "minor", // one or two letters isn't a lot to go on
     end: '\\]',
     contains: [
       'self',
@@ -131,17 +133,20 @@ export default function(hljs) {
       TPIO,
       {
         className: 'keyword',
+        relevance: 'keyword',
         begin: '/(PROG|ATTR|MN|POS|END)\\b'
       },
       {
         /* this is for cases like ,CALL */
         className: 'keyword',
+        relevance: 'keyword',
         begin: '(CALL|RUN|POINT_LOGIC|LBL)\\b'
       },
       {
         /* this is for cases like CNT100 where the default lexemes do not
          * separate the keyword and the number */
         className: 'keyword',
+        relevance: 'keyword',
         begin: '\\b(ACC|CNT|Skip|Offset|PSPD|RT_LD|AP_LD|Tool_Offset)'
       },
       {
@@ -151,7 +156,7 @@ export default function(hljs) {
         relevance: 0
       },
       hljs.COMMENT('//', '[;$]'),
-      hljs.COMMENT('!', '[;$]'),
+      hljs.COMMENT('!', '[;$]', { relevance: 0 }),
       hljs.COMMENT('--eg:', '$'),
       hljs.QUOTE_STRING_MODE,
       {

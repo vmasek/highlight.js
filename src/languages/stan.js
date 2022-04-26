@@ -376,7 +376,7 @@ export default function(hljs) {
   const INCLUDE = {
     scope: 'meta',
     begin: /#include\b/,
-    relevance: 1,
+    relevance: "keyword",
     end: /$/,
     contains: [
       {
@@ -411,8 +411,7 @@ export default function(hljs) {
       BLOCK_COMMENT,
       {
         scope: 'built_in',
-        match: /\s(pi|e|sqrt2|log2|log10)(?=\()/,
-        relevance: 0
+        match: /\s(pi|e|sqrt2|log2|log10)(?=\()/
       },
       {
         match: regex.concat(/[<,]\s*/, regex.either(...RANGE_CONSTRAINTS), /\s*=/),
@@ -420,12 +419,12 @@ export default function(hljs) {
       },
       {
         scope: 'keyword',
-        relevance: 0,
         match: /\btarget(?=\s*\+=)/,
+        keywords: "target"
       },
       {
         // highlights the 'T' in T[,] for only Stan language distributrions
-        relevance: 1,
+        relevance: "keyword",
         match: [
           /~\s*/,
           regex.either(...DISTRIBUTIONS),
@@ -440,13 +439,12 @@ export default function(hljs) {
       {
         // highlights distributions that end with special endings
         scope: 'built_in',
-        relevance: 1,
         keywords: DISTRIBUTIONS,
         begin: regex.concat(/\w*/, regex.either(...DISTRIBUTIONS), /(_lpdf|_lupdf|_lpmf|_cdf|_lcdf|_lccdf|_qf)(?=\s*[\(.*\)])/)
       },
       {
         scope: { 3: "built_in" },
-        relevance: 1,
+        relevance: "keyword",
         // highlights distributions after ~
         begin: [
           /~/,
@@ -456,6 +454,7 @@ export default function(hljs) {
       },
       {
         scope: { 2: "title.function" },
+        relevance: "minor",
         // highlights user defined distributions after ~
         begin: [
           /~/,
@@ -466,7 +465,7 @@ export default function(hljs) {
       {
         // highlights user defined distributions with special endings
         scope: 'title.function',
-        relevance: 1,
+        relevance: "minor",
         begin: /\w*(_lpdf|_lupdf|_lpmf|_cdf|_lcdf|_lccdf|_qf)(?=\s*[\(.*\)])/
       },
       {

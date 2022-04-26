@@ -73,27 +73,23 @@ export default function(hljs) {
       hljs.NUMBER_MODE,
       {
         className: 'string',
-        begin: '\'',
-        end: '\'',
-        illegal: '\\n'
+        begin: /'/,
+        end: /'/,
+        illegal: /\n/
       },
 
       /*
       A double quote can start either a string or a line comment. Strings are
       ended before the end of a line by another double quote and can contain
       escaped double-quotes and post-escaped line breaks.
-
-      Also, any double quote at the beginning of a line is a comment but we
-      don't handle that properly at the moment: any double quote inside will
-      turn them into a string. Handling it properly will require a smarter
-      parser.
       */
+      // Also, any double quote at the beginning of a line is a comment 
+      hljs.COMMENT(/^"/, '$'),
       {
         className: 'string',
         begin: /"(\\"|\n\\|[^"\n])*"/
       },
       hljs.COMMENT('"', '$'),
-
       {
         className: 'variable',
         begin: /[bwtglsav]:[\w\d_]+/
@@ -104,12 +100,12 @@ export default function(hljs) {
           /\s+/,
           hljs.IDENT_RE
         ],
+        relevance: "keyword", // function!?
         className: {
           1: "keyword",
-          3: "title"
+          3: "title.function"
         },
         end: '$',
-        relevance: 0,
         contains: [
           {
             className: 'params',

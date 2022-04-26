@@ -511,6 +511,7 @@ export default function(hljs) {
       {
         scope: 'number',
         contains: [ hljs.BACKSLASH_ESCAPE ],
+        relevance: "low",
         variants: [
           { begin: /\b((\d+'([bhodBHOD]))[0-9xzXZa-fA-F_]+)/ },
           { begin: /\B(('([bhodBHOD]))[0-9xzXZa-fA-F_]+)/ },
@@ -533,7 +534,8 @@ export default function(hljs) {
       },
       {
         scope: 'variable.constant',
-        match: regex.concat(/`/, regex.either(...BUILT_IN_CONSTANTS)),
+        relevance: "keyword",
+        match: regex.concat(/`/, regex.either(...BUILT_IN_CONSTANTS))
       },
       {
         scope: 'meta',

@@ -41,11 +41,10 @@ export default function(hljs) {
     illegal: '("|#|/\\*|\\s+/\\w+)',
     contains: [
       {
-        className: 'function',
         beginKeywords: 'function',
         end: '$',
         contains: [
-          hljs.UNDERSCORE_TITLE_MODE,
+          hljs.inhert(hljs.UNDERSCORE_TITLE_MODE, { scope: "title.function" }),
           {
             className: 'params',
             begin: '\\(',
@@ -62,10 +61,10 @@ export default function(hljs) {
       {
         begin: '\\[',
         end: '\\][\\.\']*',
-        relevance: 0,
         contains: COMMON_CONTAINS
       },
-      hljs.COMMENT('//', '$')
-    ].concat(COMMON_CONTAINS)
+      hljs.C_LINE_COMMENT_MODE,
+      ...COMMON_CONTAINS
+    ]
   };
 }

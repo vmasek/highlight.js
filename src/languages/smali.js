@@ -75,8 +75,7 @@ export default function(hljs) {
       {
         className: 'string',
         begin: '"',
-        end: '"',
-        relevance: 0
+        end: '"'
       },
       hljs.COMMENT(
         '#',
@@ -95,7 +94,7 @@ export default function(hljs) {
             relevance: 0
           },
           { 
-            relevance: 1,
+            relevance: "keyword",
             begin: '\\s(' + smali_keywords.join('|') + ')' 
           }
         ]
@@ -104,15 +103,15 @@ export default function(hljs) {
         className: 'built_in',
         variants: [
           { 
-            relevance: 1,
+            relevance: "keyword",
             begin: '\\s(' + smali_instr_low_prio.join('|') + ')\\s' },
           {
+            relevance: "keyword",
             begin: '\\s(' + smali_instr_low_prio.join('|') + ')((-|/)[a-zA-Z0-9]+)+\\s',
-            relevance: 2
           },
           {
+            relevance: "keyword",
             begin: '\\s(' + smali_instr_high_prio.join('|') + ')((-|/)[a-zA-Z0-9]+)*\\s',
-            relevance: 2
           }
         ]
       },

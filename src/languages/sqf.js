@@ -18,7 +18,7 @@ export default function(hljs) {
   // In SQF, a function should fit myTag_fnc_myFunction pattern
   // https://community.bistudio.com/wiki/Functions_Library_(Arma_3)#Adding_a_Function
   const FUNCTION = {
-    className: 'title',
+    className: 'title.function',
     begin: /[a-zA-Z]\w+_fnc_\w+/
   };
 
@@ -32,8 +32,7 @@ export default function(hljs) {
         end: '"',
         contains: [
           {
-            begin: '""',
-            relevance: 0
+            begin: '""'
           }
         ]
       },
@@ -42,8 +41,7 @@ export default function(hljs) {
         end: '\'',
         contains: [
           {
-            begin: '\'\'',
-            relevance: 0
+            begin: '\'\''
           }
         ]
       }

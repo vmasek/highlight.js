@@ -24,6 +24,7 @@ export default function(hljs) {
         },
         {
           className: 'keyword',
+          relevance: "minor",
           begin: /\(optional\)/
         }
       ]

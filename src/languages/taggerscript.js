@@ -20,7 +20,7 @@ export default function(hljs) {
         ]
       }
     ],
-    relevance: 2
+    relevance: "double"
   };
 
   // TODO: actual list of keywords for relevance?

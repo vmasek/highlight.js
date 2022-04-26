@@ -16,11 +16,12 @@ export default function(hljs) {
   };
   const PROGRESSVALUE = {
     className: 'string',
-    begin: '(\\+|-)\\d+'
+    begin: '(\\+|-)\\d+',
+    relevance: 0
   };
   const KEYWORDS = {
     className: 'keyword',
-    relevance: 1,
+    relevance: 'keyword',
     variants: [
       { begin: '^(test|testing|success|successful|failure|error|skip|xfail|uxsuccess)(:?)\\s+(test)?' },
       { begin: '^progress(:?)(\\s+)?(pop|push)?' },

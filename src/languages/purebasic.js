@@ -49,8 +49,7 @@ export default function(hljs) {
       hljs.COMMENT(';', '$', { relevance: 0 }),
 
       { // PROCEDURES DEFINITIONS
-        className: 'function',
-        relevance: 1,
+        relevance: "keyword",
         begin: '\\b(Procedure|Declare)(C|CDLL|DLL)?\\b',
         end: '\\(',
         excludeEnd: true,
@@ -58,15 +57,14 @@ export default function(hljs) {
         contains: [
           { // PROCEDURE KEYWORDS | PB IDE color: #006666 (Blue Stone) + Bold
             className: 'keyword',
-            begin: '(Procedure|Declare)(C|CDLL|DLL)?',
-            excludeEnd: true
+            begin: '(Procedure|Declare)(C|CDLL|DLL)?'
           },
           { // PROCEDURE RETURN TYPE SETTING | PB IDE color: #000000 (Black)
             className: 'type',
             begin: '\\.\\w*'
-            // end: ' ',
           },
-          hljs.UNDERSCORE_TITLE_MODE // PROCEDURE NAME | PB IDE color: #006666 (Blue Stone)
+          // PROCEDURE NAME | PB IDE color: #006666 (Blue Stone)
+          hljs.inhert(hljs.UNDERSCORE_TITLE_MODE , { scope: "title.function" })
         ]
       },
       STRINGS,
