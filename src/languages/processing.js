@@ -291,6 +291,7 @@ export default function(hljs) {
       /new\s+/,
       IDENT
     ],
+    relevance: 1,
     className: {
       1: "keyword",
       2: "class.title"

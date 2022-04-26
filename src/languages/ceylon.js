@@ -93,7 +93,7 @@ export default function(hljs) {
       className: 'string',
       begin: '"""',
       end: '"""',
-      relevance: 10
+      relevance: 2
     },
     {
       // string literal or template
