@@ -39,15 +39,15 @@ export default function(hljs) {
 
   const NUMCODE = {
     className: 'number',
-    begin: "0'.\\|0[box][0-9a-fA-F]*"
+    begin: /0'.\|0[box][0-9a-fA-F]*/,
+    relevance: "low"
   };
 
-  const ATOM = hljs.inherit(hljs.APOS_STRING_MODE, { relevance: 0 });
-  const STRING = hljs.inherit(hljs.QUOTE_STRING_MODE, { relevance: 0 });
+  const ATOM = hljs.APOS_STRING_MODE;
+  const STRING = hljs.inherit(hljs.QUOTE_STRING_MODE);
   const STRING_FMT = {
     className: 'subst',
-    begin: '\\\\[abfnrtv]\\|\\\\x[0-9a-fA-F]*\\\\\\|%[-+# *.0-9]*[dioxXucsfeEgGp]',
-    relevance: 0
+    begin: '\\\\[abfnrtv]\\|\\\\x[0-9a-fA-F]*\\\\\\|%[-+# *.0-9]*[dioxXucsfeEgGp]'
   };
   STRING.contains = STRING.contains.slice(); // we need our own copy of contains
   STRING.contains.push(STRING_FMT);
@@ -57,12 +57,10 @@ export default function(hljs) {
     variants: [
       { begin: '<=>' },
       {
-        begin: '<=',
-        relevance: 0
+        begin: '<='
       },
       {
-        begin: '=>',
-        relevance: 0
+        begin: '=>'
       },
       { begin: '/\\\\' },
       { begin: '\\\\/' }

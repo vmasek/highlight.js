@@ -27,17 +27,15 @@ export default function(hljs) {
   };
   const NUMBER = {
     className: 'number',
+    relevance: 0,
     variants: [
-      { begin: /[su]?0[xX][KMLHR]?[a-fA-F0-9]+/ },
+      { begin: /[su]?0[xX][KMLHR]?[a-fA-F0-9]+/, relevance: "low" },
       { begin: /[-+]?\d+(?:[.]\d+)?(?:[eE][-+]?\d+(?:[.]\d+)?)?/ }
     ],
-    relevance: 0
   };
   const LABEL = {
     className: 'symbol',
-    variants: [ { begin: /^\s*[a-z]+:/ }, // labels
-    ],
-    relevance: 0
+    begin: /^\s*[a-z]+:/ 
   };
   const VARIABLE = {
     className: 'variable',
@@ -48,7 +46,7 @@ export default function(hljs) {
     ]
   };
   const FUNCTION = {
-    className: 'title',
+    className: 'title.function',
     variants: [
       { begin: regex.concat(/@/, IDENT_RE) },
       { begin: /@\d+/ },

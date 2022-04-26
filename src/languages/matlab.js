@@ -44,11 +44,12 @@ export default function(hljs) {
     illegal: '(//|"|#|/\\*|\\s+/\\w+)',
     contains: [
       {
-        className: 'function',
         beginKeywords: 'function',
         end: '$',
         contains: [
-          hljs.UNDERSCORE_TITLE_MODE,
+          hljs.inherit(hljs.UNDERSCORE_TITLE_MODE, {
+            scope: "title.function"
+          }),
           {
             className: 'params',
             variants: [
@@ -66,8 +67,8 @@ export default function(hljs) {
       },
       {
         className: 'built_in',
-        begin: /true|false/,
-        relevance: 0,
+        match: /true|false/,
+        relevance: "keyword",
         starts: TRANSPOSE
       },
       {
@@ -82,9 +83,9 @@ export default function(hljs) {
       },
       {
         className: 'string',
-        begin: '\'',
-        end: '\'',
-        contains: [ { begin: '\'\'' } ]
+        begin: /'/,
+        end: /'/,
+        contains: [ { begin: /''/ } ]
       },
       {
         begin: /\]|\}|\)/,
@@ -98,8 +99,8 @@ export default function(hljs) {
         contains: [ { begin: '""' } ],
         starts: TRANSPOSE
       },
-      hljs.COMMENT('^\\s*%\\{\\s*$', '^\\s*%\\}\\s*$'),
-      hljs.COMMENT('%', '$')
+      hljs.COMMENT(/^\s*%\{\s*$', '^\s*%\}\s*$/),
+      hljs.COMMENT(/%/, /$/, { relevance: 0 })
     ]
   };
 }

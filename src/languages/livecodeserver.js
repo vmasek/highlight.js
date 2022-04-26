@@ -22,11 +22,17 @@ export default function(hljs) {
     hljs.COMMENT('--', '$'),
     hljs.COMMENT('[^:]//', '$')
   ];
-  const TITLE1 = hljs.inherit(hljs.TITLE_MODE, { variants: [
-    { begin: '\\b_*rig[A-Z][A-Za-z0-9_\\-]*' },
-    { begin: '\\b_[a-z0-9\\-]+' }
-  ] });
-  const TITLE2 = hljs.inherit(hljs.TITLE_MODE, { begin: '\\b([A-Za-z0-9_\\-]+)\\b' });
+  const TITLE1 = hljs.inherit(hljs.TITLE_MODE, { 
+    scope: "title.function",
+    variants: [
+      { begin: '\\b_*rig[A-Z][A-Za-z0-9_\\-]*' },
+      { begin: '\\b_[a-z0-9\\-]+' }
+    ]
+   });
+  const TITLE2 = hljs.inherit(hljs.TITLE_MODE, { 
+    scope: "title.function",
+    begin: '\\b([A-Za-z0-9_\\-]+)\\b' 
+  });
   return {
     name: 'LiveCode',
     case_insensitive: false,
@@ -109,10 +115,10 @@ export default function(hljs) {
       VARIABLE,
       {
         className: 'keyword',
-        begin: '\\bend\\sif\\b'
+        match: '\\bend\\sif\\b',
+        keywords: "end if"
       },
       {
-        className: 'function',
         beginKeywords: 'function',
         end: '$',
         contains: [
@@ -126,7 +132,6 @@ export default function(hljs) {
         ]
       },
       {
-        className: 'function',
         begin: '\\bend\\s+',
         end: '$',
         keywords: 'end',
@@ -154,7 +159,7 @@ export default function(hljs) {
         variants: [
           {
             begin: '<\\?(rev|lc|livecode)',
-            relevance: 9
+            relevance: "high"
           },
           { begin: '<\\?' },
           { begin: '\\?>' }
@@ -164,8 +169,9 @@ export default function(hljs) {
       hljs.QUOTE_STRING_MODE,
       hljs.BINARY_NUMBER_MODE,
       hljs.C_NUMBER_MODE,
-      TITLE1
-    ].concat(COMMENT_MODES),
+      TITLE1,
+      ...COMMENT_MODES
+    ],
     illegal: ';$|^\\[|^=|&|\\{'
   };
 }
