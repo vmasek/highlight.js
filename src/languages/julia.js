@@ -408,7 +408,7 @@ export default function(hljs) {
       {
         begin: '#=',
         end: '=#',
-        relevance: 10
+        relevance: 1
       },
       {
         begin: '#',

@@ -55,8 +55,7 @@ export default function(hljs) {
     },
     {
       begin: "\\$/",
-      end: "/\\$",
-      relevance: 10
+      end: "/\\$"
     },
     hljs.APOS_STRING_MODE,
     hljs.QUOTE_STRING_MODE
@@ -140,7 +139,7 @@ export default function(hljs) {
     contains: [
       hljs.SHEBANG({
         binary: "groovy",
-        relevance: 10
+        relevance: 9
       }),
       COMMENT,
       STRING,

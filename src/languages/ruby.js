@@ -95,7 +95,7 @@ export default function(hljs) {
       '^=end',
       {
         contains: [ YARDOCTAG ],
-        relevance: 10
+        relevance: 9
       }
     ),
     hljs.COMMENT('^__END__', hljs.MATCH_NOTHING_RE)

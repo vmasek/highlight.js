@@ -46,8 +46,7 @@ export default function(hljs) {
     ),
     hljs.COMMENT(
       /\(\*/,
-      /\*\)/,
-      { relevance: 10 }
+      /\*\)/
     )
   ];
   const STRING = {
