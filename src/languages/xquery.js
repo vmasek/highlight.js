@@ -202,39 +202,51 @@ export default function(_hljs) {
     variants: [
       {
         begin: /\barray:/,
+        relevance: "double",
         end: /(?:append|filter|flatten|fold-(?:left|right)|for-each(?:-pair)?|get|head|insert-before|join|put|remove|reverse|size|sort|subarray|tail)\b/
       },
       {
         begin: /\bmap:/,
+        relevance: "double",
         end: /(?:contains|entry|find|for-each|get|keys|merge|put|remove|size)\b/
       },
       {
         begin: /\bmath:/,
+        relevance: "double",
         end: /(?:a(?:cos|sin|tan[2]?)|cos|exp(?:10)?|log(?:10)?|pi|pow|sin|sqrt|tan)\b/
       },
       {
         begin: /\bop:/,
+        relevance: "keyword",
         end: /\(/,
         excludeEnd: true
       },
       {
         begin: /\bfn:/,
+        relevance: "keyword",
         end: /\(/,
         excludeEnd: true
       },
       // do not highlight inbuilt strings as variable or xml element names
-      { begin: /[^</$:'"-]\b(?:abs|accumulator-(?:after|before)|adjust-(?:date(?:Time)?|time)-to-timezone|analyze-string|apply|available-(?:environment-variables|system-properties)|avg|base-uri|boolean|ceiling|codepoints?-(?:equal|to-string)|collation-key|collection|compare|concat|contains(?:-token)?|copy-of|count|current(?:-)?(?:date(?:Time)?|time|group(?:ing-key)?|output-uri|merge-(?:group|key))?data|dateTime|days?-from-(?:date(?:Time)?|duration)|deep-equal|default-(?:collation|language)|distinct-values|document(?:-uri)?|doc(?:-available)?|element-(?:available|with-id)|empty|encode-for-uri|ends-with|environment-variable|error|escape-html-uri|exactly-one|exists|false|filter|floor|fold-(?:left|right)|for-each(?:-pair)?|format-(?:date(?:Time)?|time|integer|number)|function-(?:arity|available|lookup|name)|generate-id|has-children|head|hours-from-(?:dateTime|duration|time)|id(?:ref)?|implicit-timezone|in-scope-prefixes|index-of|innermost|insert-before|iri-to-uri|json-(?:doc|to-xml)|key|lang|last|load-xquery-module|local-name(?:-from-QName)?|(?:lower|upper)-case|matches|max|minutes-from-(?:dateTime|duration|time)|min|months?-from-(?:date(?:Time)?|duration)|name(?:space-uri-?(?:for-prefix|from-QName)?)?|nilled|node-name|normalize-(?:space|unicode)|not|number|one-or-more|outermost|parse-(?:ietf-date|json)|path|position|(?:prefix-from-)?QName|random-number-generator|regex-group|remove|replace|resolve-(?:QName|uri)|reverse|root|round(?:-half-to-even)?|seconds-from-(?:dateTime|duration|time)|snapshot|sort|starts-with|static-base-uri|stream-available|string-?(?:join|length|to-codepoints)?|subsequence|substring-?(?:after|before)?|sum|system-property|tail|timezone-from-(?:date(?:Time)?|time)|tokenize|trace|trans(?:form|late)|true|type-available|unordered|unparsed-(?:entity|text)?-?(?:public-id|uri|available|lines)?|uri-collection|xml-to-json|years?-from-(?:date(?:Time)?|duration)|zero-or-one)\b/ },
+      { 
+        // we're not highlighting ut it still looks like strong signal
+        relevance: "minor",
+        begin: /[^</$:'"-]\b(?:abs|accumulator-(?:after|before)|adjust-(?:date(?:Time)?|time)-to-timezone|analyze-string|apply|available-(?:environment-variables|system-properties)|avg|base-uri|boolean|ceiling|codepoints?-(?:equal|to-string)|collation-key|collection|compare|concat|contains(?:-token)?|copy-of|count|current(?:-)?(?:date(?:Time)?|time|group(?:ing-key)?|output-uri|merge-(?:group|key))?data|dateTime|days?-from-(?:date(?:Time)?|duration)|deep-equal|default-(?:collation|language)|distinct-values|document(?:-uri)?|doc(?:-available)?|element-(?:available|with-id)|empty|encode-for-uri|ends-with|environment-variable|error|escape-html-uri|exactly-one|exists|false|filter|floor|fold-(?:left|right)|for-each(?:-pair)?|format-(?:date(?:Time)?|time|integer|number)|function-(?:arity|available|lookup|name)|generate-id|has-children|head|hours-from-(?:dateTime|duration|time)|id(?:ref)?|implicit-timezone|in-scope-prefixes|index-of|innermost|insert-before|iri-to-uri|json-(?:doc|to-xml)|key|lang|last|load-xquery-module|local-name(?:-from-QName)?|(?:lower|upper)-case|matches|max|minutes-from-(?:dateTime|duration|time)|min|months?-from-(?:date(?:Time)?|duration)|name(?:space-uri-?(?:for-prefix|from-QName)?)?|nilled|node-name|normalize-(?:space|unicode)|not|number|one-or-more|outermost|parse-(?:ietf-date|json)|path|position|(?:prefix-from-)?QName|random-number-generator|regex-group|remove|replace|resolve-(?:QName|uri)|reverse|root|round(?:-half-to-even)?|seconds-from-(?:dateTime|duration|time)|snapshot|sort|starts-with|static-base-uri|stream-available|string-?(?:join|length|to-codepoints)?|subsequence|substring-?(?:after|before)?|sum|system-property|tail|timezone-from-(?:date(?:Time)?|time)|tokenize|trace|trans(?:form|late)|true|type-available|unordered|unparsed-(?:entity|text)?-?(?:public-id|uri|available|lines)?|uri-collection|xml-to-json|years?-from-(?:date(?:Time)?|duration)|zero-or-one)\b/ 
+      },
       {
         begin: /\blocal:/,
+        relevance: "keyword",
         end: /\(/,
         excludeEnd: true
       },
       {
         begin: /\bzip:/,
+        relevance: "double",
         end: /(?:zip-file|(?:xml|html|text|binary)-entry| (?:update-)?entries)\b/
       },
       {
         begin: /\b(?:util|db|functx|app|xdmp|xmldb):/,
+        relevance: "keyword",
         end: /\(/,
         excludeEnd: true
       }
@@ -244,6 +256,7 @@ export default function(_hljs) {
   const TITLE = {
     className: 'title',
     begin: /\bxquery version "[13]\.[01]"\s?(?:encoding ".+")?/,
+    relevance: "important!",
     end: /;/
   };
 
@@ -266,8 +279,7 @@ export default function(_hljs) {
         end: /"/,
         contains: [
           {
-            begin: /""/,
-            relevance: 0
+            begin: /""/
           }
         ]
       },
@@ -276,8 +288,7 @@ export default function(_hljs) {
         end: /'/,
         contains: [
           {
-            begin: /''/,
-            relevance: 0
+            begin: /''/
           }
         ]
       }
@@ -293,7 +304,6 @@ export default function(_hljs) {
     className: 'comment',
     begin: /\(:/,
     end: /:\)/,
-    relevance: 2,
     contains: [
       {
         className: 'doctag',
@@ -326,24 +336,6 @@ export default function(_hljs) {
     ]
   };
 
-  const CONTAINS = [
-    VAR,
-    BUILT_IN,
-    STRING,
-    NUMBER,
-    COMMENT,
-    ANNOTATION,
-    TITLE,
-    COMPUTED,
-    DIRECT
-  ];
-
-  const METHOD = {
-    begin: /\{/,
-    end: /\}/,
-    contains: CONTAINS
-  };
-
   return {
     name: 'XQuery',
     aliases: [
@@ -358,6 +350,16 @@ export default function(_hljs) {
       type: TYPES,
       literal: LITERALS
     },
-    contains: CONTAINS
+    contains: [
+      VAR,
+      BUILT_IN,
+      STRING,
+      NUMBER,
+      COMMENT,
+      ANNOTATION,
+      TITLE,
+      COMPUTED,
+      DIRECT
+    ]
   };
 }

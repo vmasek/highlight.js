@@ -37,6 +37,7 @@ export default function(hljs) {
   const TIME_24H = /\d{1,2}(:\d{1,2}){1,2}/;
   const DATE = {
     className: 'literal',
+    relevance: "low",
     variants: [
       {
         // #YYYY-MM-DD# (ISO-Date) or #M/D/YYYY# (US-Date)
@@ -71,13 +72,13 @@ export default function(hljs) {
         begin: /\b\d[\d_]*((U?[SIL])|[%&])?/ },
       {
         // Integer (base 16)
-        begin: /&H[\dA-F_]+((U?[SIL])|[%&])?/ },
+        begin: /&H[\dA-F_]+((U?[SIL])|[%&])?/, relevance: "low" },
       {
         // Integer (base 8)
-        begin: /&O[0-7_]+((U?[SIL])|[%&])?/ },
+        begin: /&O[0-7_]+((U?[SIL])|[%&])?/, relevance: "low" },
       {
         // Integer (base 2)
-        begin: /&B[01_]+((U?[SIL])|[%&])?/ }
+        begin: /&B[01_]+((U?[SIL])|[%&])?/, relevance: "low" }
     ]
   };
 
@@ -94,20 +95,22 @@ export default function(hljs) {
     }
   ] });
 
-  const COMMENT = hljs.COMMENT(null, /$/, { variants: [
-    { begin: /'/ },
-    {
-      // TODO: Use multi-class for leading spaces
-      begin: /([\t ]|^)REM(?=\s)/ }
-  ] });
+  const COMMENT = hljs.COMMENT(null, /$/, { 
+    variants: [
+      { begin: /'/ },
+      {
+        // TODO: Use multi-class for leading spaces
+        begin: /([\t ]|^)REM(?=\s)/ 
+      }
+    ]
+  });
 
   const DIRECTIVES = {
     className: 'meta',
     // TODO: Use multi-class for indentation once available
     begin: /[\t ]*#(const|disable|else|elseif|enable|end|externalsource|if|region)\b/,
     end: /$/,
-    keywords: { keyword:
-        'const disable else elseif enable end externalsource if region then' },
+    keywords: 'const disable else elseif enable end externalsource if region then',
     contains: [ COMMENT ]
   };
 

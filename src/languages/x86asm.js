@@ -91,8 +91,7 @@ export default function(hljs) {
 
           // Hex number in $
           {
-            begin: '\\$[0-9][0-9A-Fa-f]*',
-            relevance: 0
+            begin: '\\$[0-9][0-9A-Fa-f]*'
           },
 
           // Number in H,D,T,Q,O,B,Y suffix
@@ -117,8 +116,7 @@ export default function(hljs) {
             begin: '`',
             end: '[^\\\\]`'
           }
-        ],
-        relevance: 0
+        ]
       },
       {
         className: 'symbol',
@@ -127,20 +125,17 @@ export default function(hljs) {
           { begin: '^\\s*[A-Za-z._?][A-Za-z0-9_$#@~.?]*(:|\\s+label)' },
           // Macro-local label
           { begin: '^\\s*%%[A-Za-z0-9_$#@~.?]*:' }
-        ],
-        relevance: 0
+        ]
       },
       // Macro parameter
       {
         className: 'subst',
-        begin: '%[0-9]+',
-        relevance: 0
+        begin: '%[0-9]+'
       },
       // Macro parameter
       {
         className: 'subst',
-        begin: '%!\S+',
-        relevance: 0
+        begin: '%!\S+'
       },
       {
         className: 'meta',

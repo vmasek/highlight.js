@@ -23,6 +23,7 @@ export default function(hljs) {
       + 'when with-syntax and begin call-with-current-continuation '
       + 'call-with-input-file call-with-output-file case cond define '
       + 'define-syntax delay do dynamic-wind else for-each if lambda let let* '
+      // TODO: operators should move and have lower relevance
       + 'let-syntax letrec letrec-syntax map or syntax-rules \' * + , ,@ - ... / '
       + '; < <= = => > >= ` abs acos angle append apply asin assoc assq assv atan '
       + 'boolean? caar cadr call-with-input-file call-with-output-file '
@@ -53,6 +54,7 @@ export default function(hljs) {
 
   const LITERAL = {
     className: 'literal',
+    relevance: "minor", // not enough signal to be kw?
     begin: '(#t|#f|#\\\\' + SCHEME_IDENT_RE + '|#\\\\.)'
   };
 
@@ -67,9 +69,9 @@ export default function(hljs) {
         begin: SCHEME_COMPLEX_NUMBER_RE,
         relevance: 0
       },
-      { begin: '#b[0-1]+(/[0-1]+)?' },
-      { begin: '#o[0-7]+(/[0-7]+)?' },
-      { begin: '#x[0-9a-f]+(/[0-9a-f]+)?' }
+      { begin: '#b[0-1]+(/[0-1]+)?', relevance: "low" },
+      { begin: '#o[0-7]+(/[0-7]+)?', relevance: "low" },
+      { begin: '#x[0-9a-f]+(/[0-9a-f]+)?', relevance: "low" }
     ]
   };
 
@@ -181,8 +183,9 @@ export default function(hljs) {
     IDENT,
     QUOTED_IDENT,
     QUOTED_LIST,
-    LIST
-  ].concat(COMMENT_MODES);
+    LIST,
+    ...COMMENT_MODES
+  ];
 
   return {
     name: 'Scheme',
@@ -193,7 +196,8 @@ export default function(hljs) {
       STRING,
       QUOTED_IDENT,
       QUOTED_LIST,
-      LIST
-    ].concat(COMMENT_MODES)
+      LIST,
+      ...COMMENT_MODES
+    ]
   };
 }

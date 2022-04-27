@@ -43,7 +43,6 @@ export default function(hljs) {
   };
   const STRING = {
     className: 'string',
-    relevance: 0,
     variants: [
       {
         begin: /'/,
@@ -53,7 +52,10 @@ export default function(hljs) {
         begin: /"/,
         end: /"/
       },
-      { begin: /\S+/ }
+      { 
+        // strings with no wrapping delimiters aren't enough signal
+        begin: /\S+/, relevance: 0 
+      }
     ],
     contains: [
       hljs.BACKSLASH_ESCAPE,
@@ -72,7 +74,10 @@ export default function(hljs) {
       begin: /"/,
       end: /"/
     },
-    { begin: /[^\s,{}[\]]+/ }
+    { 
+      // strings with no wrapping delimiters aren't enough signal
+      begin: /[^\s,{}[\]]+/, relevance: 0  
+    }
   ] });
 
   const DATE_RE = '[0-9]{4}(-[0-9][0-9]){0,2}';
@@ -155,7 +160,6 @@ export default function(hljs) {
     },
     { // array listing
       className: 'bullet',
-      // TODO: remove |$ hack when we have proper look-ahead support
       begin: '-(?=[ ]|$)',
       relevance: 0
     },
@@ -178,7 +182,7 @@ export default function(hljs) {
   ];
 
   const VALUE_MODES = [ ...MODES ];
-  VALUE_MODES.pop();
+  VALUE_MODES.pop(); // STRING
   VALUE_MODES.push(CONTAINER_STRING);
   VALUE_CONTAINER.contains = VALUE_MODES;
 
