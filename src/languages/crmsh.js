@@ -28,7 +28,8 @@ export default function(hljs) {
     ],
     case_insensitive: true,
     keywords: {
-      keyword: KEYWORDS + ' ' + OPERATORS + ' ' + TYPES,
+      keyword: KEYWORDS + ' ' + OPERATORS,
+      type: TYPES,
       literal: LITERALS
     },
     contains: [
@@ -70,7 +71,7 @@ export default function(hljs) {
       {
         className: 'meta',
         begin: '(ocf|systemd|service|lsb):[\\w_:-]+',
-        relevance: 0
+        relevance: "half"
       },
       {
         className: 'number',
@@ -79,19 +80,16 @@ export default function(hljs) {
       },
       {
         className: 'literal',
-        begin: '[-]?(infinity|inf)',
-        relevance: 0
+        begin: '[-]?(infinity|inf)'
       },
       {
         className: 'attr',
-        begin: /([A-Za-z$_#][\w_-]+)=/,
-        relevance: 0
+        begin: /([A-Za-z$_#][\w_-]+)=/
       },
       {
         className: 'tag',
         begin: '</?',
-        end: '/?>',
-        relevance: 0
+        end: '/?>'
       }
     ]
   };

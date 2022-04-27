@@ -20,7 +20,6 @@ export default function(hljs) {
       '/\\*\\*',
       '\\*/',
       {
-        relevance: 0,
         contains: [
           {
             // eat up @'s in emails to prevent them to be recognized as doctags
@@ -69,6 +68,7 @@ export default function(hljs) {
       /\s+/,
       hljs.UNDERSCORE_IDENT_RE
     ],
+    relevance: "keyword",
     scope: {
       1: "keyword",
       3: "title.class",
@@ -139,7 +139,7 @@ export default function(hljs) {
     contains: [
       hljs.SHEBANG({
         binary: "groovy",
-        relevance: 9
+        relevance: "important!"
       }),
       COMMENT,
       STRING,
@@ -149,13 +149,13 @@ export default function(hljs) {
       {
         className: 'meta',
         begin: '@[A-Za-z]+',
-        relevance: 0
+        relevance: "low"
       },
       {
         // highlight map keys and named parameters as attrs
         className: 'attr',
         begin: IDENT_RE + '[ \t]*:',
-        relevance: 0
+        relevance: "low"
       },
       {
         // catch middle element of the ternary operator
@@ -176,8 +176,7 @@ export default function(hljs) {
         className: 'symbol',
         begin: '^[ \t]*' + regex.lookahead(IDENT_RE + ':'),
         excludeBegin: true,
-        end: IDENT_RE + ':',
-        relevance: 0
+        end: IDENT_RE + ':'
       }
     ],
     illegal: /#|<\//

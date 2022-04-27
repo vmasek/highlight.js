@@ -80,6 +80,7 @@ export default function(hljs) {
   const BANG_KEYWORD_MODE = {
     // monad builder keywords (matches before non-bang keywords)
     scope: 'keyword',
+    relevance: "keyword",
     match: /\b(yield|return|let|do|match|use)!/
   };
 
@@ -243,8 +244,7 @@ export default function(hljs) {
       { match: regex.concat(BEGIN_GENERIC_TYPE_SYMBOL_RE, /``.*?``/) },
       // the type name is a normal identifier (we don't use IDENTIFIER_RE because there cannot be another apostrophe here):
       { match: regex.concat(BEGIN_GENERIC_TYPE_SYMBOL_RE, hljs.UNDERSCORE_IDENT_RE) }
-    ],
-    relevance: 0
+    ]
   };
 
   const makeOperatorMode = function({ includeEqual }) {
@@ -367,6 +367,7 @@ export default function(hljs) {
       regex.concat(/#/, regex.either(...PREPROCESSOR_KEYWORDS)),
       /\b/
     ],
+    relevance: "keyword",
     beginScope: { 2: 'meta' },
     end: regex.lookahead(/\s|$/)
   };
@@ -408,8 +409,7 @@ export default function(hljs) {
   const TRIPLE_QUOTED_STRING = {
     scope: 'string',
     begin: /"""/,
-    end: /"""/,
-    relevance: 2
+    end: /"""/
   };
   const SUBST = {
     scope: 'subst',
@@ -534,7 +534,7 @@ export default function(hljs) {
         scope: 'meta',
         begin: /\[</,
         end: />\]/,
-        relevance: 2,
+        relevance: "low",
         contains: [
           QUOTED_IDENTIFIER,
           // can contain any constant value
