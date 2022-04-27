@@ -124,6 +124,7 @@ export const BUILT_IN_GLOBALS = [
   "require",
   "exports",
 
+  "alert",
   "eval",
   "isFinite",
   "isNaN",
