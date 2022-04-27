@@ -92,6 +92,9 @@ export default function(hljs) {
     "call"
   ];
 
+  const TITLE_CLASS = hljs.inherit(hljs.UNDERSCORE_TITLE_MODE, {scope: "title.class" });
+  const TITLE_FUNCTION = hljs.inherit(hljs.UNDERSCORE_TITLE_MODE, {scope: "title.function" });
+
   return {
     name: 'AspectJ',
     keywords: KEYWORDS,
@@ -101,7 +104,6 @@ export default function(hljs) {
         /\/\*\*/,
         /\*\//,
         {
-          relevance: 0,
           contains: [
             {
               // eat up @'s in emails to prevent them to be recognized as doctags
@@ -120,14 +122,13 @@ export default function(hljs) {
       hljs.APOS_STRING_MODE,
       hljs.QUOTE_STRING_MODE,
       {
-        className: 'class',
         beginKeywords: 'aspect',
         end: /[{;=]/,
         excludeEnd: true,
         illegal: /[:;"\[\]]/,
         contains: [
           { beginKeywords: 'extends implements pertypewithin perthis pertarget percflowbelow percflow issingleton' },
-          hljs.UNDERSCORE_TITLE_MODE,
+          TITLE_CLASS,
           {
             begin: /\([^\)]*/,
             end: /[)]+/,
@@ -137,7 +138,6 @@ export default function(hljs) {
         ]
       },
       {
-        className: 'class',
         beginKeywords: 'class interface',
         end: /[{;=]/,
         excludeEnd: true,
@@ -146,7 +146,7 @@ export default function(hljs) {
         illegal: /[:"\[\]]/,
         contains: [
           { beginKeywords: 'extends implements' },
-          hljs.UNDERSCORE_TITLE_MODE
+          TITLE_CLASS
         ]
       },
       {
@@ -159,7 +159,7 @@ export default function(hljs) {
           {
             begin: regex.concat(hljs.UNDERSCORE_IDENT_RE, /\s*\(/),
             returnBegin: true,
-            contains: [ hljs.UNDERSCORE_TITLE_MODE ]
+            contains: [ TITLE_CLASS ]
           }
         ]
       },
@@ -174,20 +174,17 @@ export default function(hljs) {
         contains: [
           {
             begin: regex.concat(hljs.UNDERSCORE_IDENT_RE, /\s*\(/),
-            keywords: KEYWORDS.concat(SHORTKEYS),
-            relevance: 0
+            keywords: KEYWORDS.concat(SHORTKEYS)
           },
           hljs.QUOTE_STRING_MODE
         ]
       },
       {
         // this prevents 'new Name(...), or throw ...' from being recognized as a function definition
-        beginKeywords: 'new throw',
-        relevance: 0
+        beginKeywords: 'new throw'
       },
       {
         // the function class is a bit different for AspectJ compared to the Java language
-        className: 'function',
         begin: /\w+ +\w+(\.\w+)?\s*\([^\)]*\)\s*((throws)[\w\s,]+)?[\{;]/,
         returnBegin: true,
         end: /[{;=]/,
@@ -197,8 +194,7 @@ export default function(hljs) {
           {
             begin: regex.concat(hljs.UNDERSCORE_IDENT_RE, /\s*\(/),
             returnBegin: true,
-            relevance: 0,
-            contains: [ hljs.UNDERSCORE_TITLE_MODE ]
+            contains: [ TITLE_FUNCTION ]
           },
           {
             className: 'params',
