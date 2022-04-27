@@ -193,7 +193,7 @@ export default function(hljs) {
         className: 'string',
         variants: [
           { begin: /b?r(#*)"(.|\n)*?"\1(?!#)/ },
-          { begin: /b?'\\?(x\w{2}|u\w{4}|U\w{8}|.)'/ }
+          { begin: /b?'\\?(x\w{2}|u\w{4}|U\w{8}|.)'/, relevance: "low" }
         ]
       },
       {
@@ -202,14 +202,14 @@ export default function(hljs) {
       },
       {
         className: 'number',
+        relevance: 0,
         variants: [
-          { begin: '\\b0b([01_]+)' + NUMBER_SUFFIX },
-          { begin: '\\b0o([0-7_]+)' + NUMBER_SUFFIX },
-          { begin: '\\b0x([A-Fa-f0-9_]+)' + NUMBER_SUFFIX },
+          { begin: '\\b0b([01_]+)' + NUMBER_SUFFIX, relevance: "low" },
+          { begin: '\\b0o([0-7_]+)' + NUMBER_SUFFIX, relevance: "low" },
+          { begin: '\\b0x([A-Fa-f0-9_]+)' + NUMBER_SUFFIX, relevance: "low" },
           { begin: '\\b(\\d[\\d_]*(\\.[0-9_]+)?([eE][+-]?[0-9_]+)?)'
                    + NUMBER_SUFFIX }
-        ],
-        relevance: 0
+        ]
       },
       {
         begin: [
@@ -217,6 +217,7 @@ export default function(hljs) {
           /\s+/,
           hljs.UNDERSCORE_IDENT_RE
         ],
+        relevance: "keyword",
         className: {
           1: "keyword",
           3: "title.function"
@@ -241,6 +242,7 @@ export default function(hljs) {
           /(?:mut\s+)?/,
           hljs.UNDERSCORE_IDENT_RE
         ],
+        relevance: "keyword",
         className: {
           1: "keyword",
           3: "keyword",
@@ -256,6 +258,7 @@ export default function(hljs) {
           /\s+/,
           /in/
         ],
+        relevance: "double",
         className: {
           1: "keyword",
           3: "variable",
@@ -268,6 +271,7 @@ export default function(hljs) {
           /\s+/,
           hljs.UNDERSCORE_IDENT_RE
         ],
+        relevance: "keyword",
         className: {
           1: "keyword",
           3: "title.class"
@@ -279,6 +283,7 @@ export default function(hljs) {
           /\s+/,
           hljs.UNDERSCORE_IDENT_RE
         ],
+        relevance: "keyword",
         className: {
           1: "keyword",
           3: "title.class"

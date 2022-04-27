@@ -5,8 +5,6 @@ Author: Jan T. Sott <jan.sott@gmail.com>
 Website: https://nsis.sourceforge.io/Main_Page
 */
 
-import * as regex from '../lib/regex.js';
-
 export default function(hljs) {
   const regex = hljs.regex;
   const LANGUAGE_CONSTANTS = [
@@ -148,6 +146,7 @@ export default function(hljs) {
 
   const CONSTANTS = {
     className: 'variable.constant',
+    relevance: "keyword",
     begin: regex.concat(/\$/, regex.either(...LANGUAGE_CONSTANTS))
   };
 
@@ -173,12 +172,14 @@ export default function(hljs) {
   const PARAMETERS = {
     // command parameters
     className: 'params',
+    relevance: "keyword",
     begin: regex.either(...PARAM_NAMES)
   };
 
   const COMPILER = {
     // !compiler_flags
     className: 'keyword',
+    relevance: "keyword",
     begin: regex.concat(
       /!/,
       regex.either(...COMPILER_FLAGS)
@@ -188,7 +189,8 @@ export default function(hljs) {
   const ESCAPE_CHARS = {
     // $\n, $\r, $\t, $$
     className: 'char.escape',
-    begin: /\$(\\[nrt]|\$)/
+    begin: /\$(\\[nrt]|\$)/,
+    relevance: "low"
   };
 
   const PLUGINS = {
@@ -215,11 +217,11 @@ export default function(hljs) {
     ],
     illegal: /\n/,
     contains: [
-      ESCAPE_CHARS,
       CONSTANTS,
       DEFINES,
       VARIABLES,
-      LANGUAGES
+      LANGUAGES,
+      ESCAPE_CHARS
     ]
   };
 
@@ -500,6 +502,7 @@ export default function(hljs) {
       /\s+/,
       regex.concat(/(\.)?/, hljs.IDENT_RE)
     ],
+    relevance: "keyword",
     scope: {
       1: "keyword",
       3: "title.function"
@@ -516,6 +519,7 @@ export default function(hljs) {
       /(?:\/GLOBAL\s+)?/,
       VARIABLE_NAME_RE
     ],
+    relevance: "keyword",
     scope: {
       1: "keyword",
       3: "params",

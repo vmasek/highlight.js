@@ -9,10 +9,12 @@ Category: scientific
 export default function(hljs) {
   const SPECIAL_VARS = {
     className: 'keyword',
+    relevance: "keyword",
     begin: '\\$(f[asn]|t|vp[rtd]|children)'
   };
   const LITERALS = {
     className: 'literal',
+    relevance: "keyword",
     begin: 'false|true|PI|undef'
   };
   const NUMBERS = {
@@ -44,12 +46,11 @@ export default function(hljs) {
     relevance: 0
   };
   const FUNCTIONS = {
-    className: 'function',
     beginKeywords: 'module function',
     end: /=|\{/,
     contains: [
       PARAMS,
-      hljs.UNDERSCORE_TITLE_MODE
+      hljs.inherit(hljs.UNDERSCORE_TITLE_MODE, { scope: "title.function" })
     ]
   };
 

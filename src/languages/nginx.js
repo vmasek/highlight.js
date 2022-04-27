@@ -105,7 +105,8 @@ export default function(hljs) {
       // IP
       {
         className: 'number',
-        begin: '\\b\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}(:\\d{1,5})?\\b'
+        begin: '\\b\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}(:\\d{1,5})?\\b',
+        relevance: "minor"
       },
       // units
       {
