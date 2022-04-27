@@ -29,7 +29,7 @@ export default function(hljs) {
       {
         className: 'meta',
         begin: '^@(?:BASE|USE|CLASS|OPTIONS)$',
-        relevance: 5
+        relevance: "high"
       },
       {
         className: 'title',

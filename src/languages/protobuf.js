@@ -15,7 +15,8 @@ export default function(hljs) {
     "required",
     "repeated",
     "group",
-    "oneof"
+    "oneof",
+    "returns"
   ];
   const TYPES = [
     "double",
@@ -39,6 +40,7 @@ export default function(hljs) {
       /(message|enum|service)\s+/,
       hljs.IDENT_RE
     ],
+    relevance: "keyword",
     scope: {
       1: "keyword",
       2: "title.class"
@@ -62,15 +64,28 @@ export default function(hljs) {
       hljs.C_BLOCK_COMMENT_MODE,
       CLASS_DEFINITION,
       {
-        className: 'function',
-        beginKeywords: 'rpc',
-        end: /[{;]/,
-        excludeEnd: true,
-        keywords: 'rpc returns'
+        match: [
+          /rpc /,
+          hljs.IDENT_RE
+        ],
+        relevance: "keyword",
+        scope: {
+          1: "keyword",
+          2: "title.function"
+        }
       },
-      { // match enum items (relevance)
-        // BLAH = ...;
-        begin: /^\s*[A-Z_]+(?=\s*=[^\n]+;$)/ }
+      { // match enum items
+        // BLAH = ...
+        match: [
+          /^\s*/,
+          /[A-Z_]+/,
+          /\s*=/,
+          /(?=[^\n]+)/
+        ],
+        scope: {
+          2: "variable.constant"
+        }
+      }
     ]
   };
 }
