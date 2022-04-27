@@ -110,20 +110,20 @@ export default function(hljs) {
         variants: [
           {
             begin: hljs.C_NUMBER_RE + '[i]',
-            relevance: 1
+            relevance: "low"
           },
           hljs.C_NUMBER_MODE
         ]
       },
-      { begin: /:=/ // relevance booster
+      { 
+        begin: /:=/ // relevance booster
       },
       {
-        className: 'function',
         beginKeywords: 'func',
         end: '\\s*(\\{|$)',
         excludeEnd: true,
         contains: [
-          hljs.TITLE_MODE,
+          hljs.inherit(hljs.TITLE_MODE, {scope: "title.function"}),
           {
             className: 'params',
             begin: /\(/,

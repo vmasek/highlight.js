@@ -51,8 +51,7 @@ export default function(hljs) {
         className: 'string',
         begin: '[a-z]+"""',
         end: '"""',
-        contains: [ SUBST ],
-        relevance: 2
+        contains: [ SUBST ]
       }
     ]
 
@@ -115,6 +114,7 @@ export default function(hljs) {
       'extension',
       /\s+(?=[[(])/, // followed by at least one space and `[` or `(`
     ],
+    relevance: "keyword",
     beginScope: { 2: "keyword", }
   };
 
@@ -126,6 +126,7 @@ export default function(hljs) {
         /\s+/,
         /(extension\b)?/, // `extension` is the only marker that follows an `end` that cannot be captured by another rule.
       ],
+      relevance: "keyword",
       beginScope: {
         2: "keyword",
         4: "keyword",
@@ -136,9 +137,10 @@ export default function(hljs) {
   // TODO: use negative look-behind in future
   //       /(?<!\.)\binline(?=\s)/
   const INLINE_MODES = [
-    { match: /\.inline\b/ },
+    { match: /\.inline\b/ }, // guard
     {
       begin: /\binline(?=\s)/,
+      relevance: "keyword",
       keywords: 'inline'
     }
   ];
@@ -149,6 +151,7 @@ export default function(hljs) {
       /using/,
       /\s+(?!\))/, // Spaces not followed by `)`
     ],
+    relevance: "keyword",
     beginScope: { 2: "keyword", }
   };
 
