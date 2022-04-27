@@ -21,7 +21,7 @@ export default function(hljs) {
   const GCODE_CODE = [
     hljs.C_LINE_COMMENT_MODE,
     hljs.C_BLOCK_COMMENT_MODE,
-    hljs.COMMENT(/\(/, /\)/),
+    hljs.COMMENT(/\(/, /\)/, { relevance: 0 }),
     NUMBER,
     hljs.inherit(hljs.APOS_STRING_MODE, { illegal: null }),
     hljs.inherit(hljs.QUOTE_STRING_MODE, { illegal: null }),
@@ -35,28 +35,25 @@ export default function(hljs) {
     },
     {
       className: 'attr',
+      relevance: "low",
       begin: '(VC|VS|#)',
       end: '(\\d+)'
     },
     {
       className: 'attr',
-      begin: '(VZOFX|VZOFY|VZOFZ)'
+      relevance: "keyword",
+      begin: /(VZOFX|VZOFY|VZOFZ)/
     },
     {
       className: 'built_in',
-      begin: '(ATAN|ABS|ACOS|ASIN|SIN|COS|EXP|FIX|FUP|ROUND|LN|TAN)(\\[)',
-      contains: [ NUMBER ],
-      end: '\\]'
+      relevance: "keyword",
+      begin: /(ATAN|ABS|ACOS|ASIN|SIN|COS|EXP|FIX|FUP|ROUND|LN|TAN)(?=\[)/
     },
     {
       className: 'symbol',
-      variants: [
-        {
-          begin: 'N',
-          end: '\\d+',
-          illegal: '\\W'
-        }
-      ]
+      begin: 'N',
+      end: '\\d+',
+      illegal: '\\W'
     }
   ];
 
@@ -72,7 +69,8 @@ export default function(hljs) {
         className: 'meta',
         begin: GCODE_CLOSE_RE
       },
-      GCODE_START
-    ].concat(GCODE_CODE)
+      GCODE_START,
+      ...GCODE_CODE
+    ]
   };
 }

@@ -68,7 +68,7 @@ export default function(hljs) {
     variants: [
       {
         begin: /'/,
-        end: /'/
+        end: /'/,
       },
       {
         begin: /"/,
@@ -81,16 +81,19 @@ export default function(hljs) {
       {
         begin: '%[Qwi]?\\(',
         end: '\\)',
+        relevance: 0,
         contains: recursiveParen('\\(', '\\)')
       },
       {
         begin: '%[Qwi]?\\[',
         end: '\\]',
+        relevance: 0,
         contains: recursiveParen('\\[', '\\]')
       },
       {
         begin: '%[Qwi]?\\{',
         end: /\}/,
+        relevance: 0,
         contains: recursiveParen(/\{/, /\}/)
       },
       {
@@ -100,17 +103,18 @@ export default function(hljs) {
       },
       {
         begin: '%[Qwi]?\\|',
-        end: '\\|'
+        end: '\\|',
+        relevance: 0,
       },
       {
         begin: /<<-\w+$/,
         end: /^\s*\w+$/
       }
-    ],
-    relevance: 0
+    ]
   };
   const Q_STRING = {
     className: 'string',
+    relevance: "low",
     variants: [
       {
         begin: '%q\\(',
@@ -140,8 +144,7 @@ export default function(hljs) {
         begin: /<<-'\w+'$/,
         end: /^\s*\w+$/
       }
-    ],
-    relevance: 0
+    ]
   };
   const REGEXP = {
     begin: '(?!%\\})(' + hljs.RE_STARTERS_RE + '|\\n|\\b(case|if|select|unless|until|when|while)\\b)\\s*',
@@ -173,6 +176,7 @@ export default function(hljs) {
       hljs.BACKSLASH_ESCAPE,
       SUBST
     ],
+    relevance: "low",
     variants: [
       {
         begin: '%r\\(',
@@ -198,8 +202,7 @@ export default function(hljs) {
         begin: '%r\\|',
         end: '\\|'
       }
-    ],
-    relevance: 0
+    ]
   };
   const ATTRIBUTE = {
     className: 'meta',
@@ -217,25 +220,23 @@ export default function(hljs) {
     VARIABLE,
     hljs.HASH_COMMENT_MODE,
     {
-      className: 'class',
       beginKeywords: 'class module struct',
       end: '$|;',
       illegal: /=/,
       contains: [
         hljs.HASH_COMMENT_MODE,
-        hljs.inherit(hljs.TITLE_MODE, { begin: CRYSTAL_PATH_RE }),
+        hljs.inherit(hljs.TITLE_MODE, { begin: CRYSTAL_PATH_RE, scope: "title.class" }),
         { // relevance booster for inheritance
           begin: '<' }
       ]
     },
     {
-      className: 'class',
       beginKeywords: 'lib enum union',
       end: '$|;',
       illegal: /=/,
       contains: [
         hljs.HASH_COMMENT_MODE,
-        hljs.inherit(hljs.TITLE_MODE, { begin: CRYSTAL_PATH_RE })
+        hljs.inherit(hljs.TITLE_MODE, { begin: CRYSTAL_PATH_RE, scope: "title.class" })
       ]
     },
     {
@@ -244,28 +245,28 @@ export default function(hljs) {
       illegal: /=/,
       contains: [
         hljs.HASH_COMMENT_MODE,
-        hljs.inherit(hljs.TITLE_MODE, { begin: CRYSTAL_PATH_RE })
+        hljs.inherit(hljs.TITLE_MODE, { begin: CRYSTAL_PATH_RE, scope: "title.class" })
       ],
       relevance: 2
     },
     {
-      className: 'function',
       beginKeywords: 'def',
       end: /\B\b/,
       contains: [
         hljs.inherit(hljs.TITLE_MODE, {
           begin: CRYSTAL_METHOD_RE,
+          scope: "title.function",
           endsParent: true
         })
       ]
     },
     {
-      className: 'function',
       beginKeywords: 'fun macro',
       end: /\B\b/,
       contains: [
         hljs.inherit(hljs.TITLE_MODE, {
           begin: CRYSTAL_METHOD_RE,
+          scope: "title.function",
           endsParent: true
         })
       ],
