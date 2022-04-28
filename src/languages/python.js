@@ -179,8 +179,7 @@ export default function(hljs) {
         contains: [
           hljs.BACKSLASH_ESCAPE,
           PROMPT
-        ],
-        relevance: 2
+        ]
       },
       {
         begin: /([uU]|[bB]|[rR]|[bB][rR]|[rR][bB])?"""/,
@@ -188,8 +187,7 @@ export default function(hljs) {
         contains: [
           hljs.BACKSLASH_ESCAPE,
           PROMPT
-        ],
-        relevance: 2
+        ]
       },
       {
         begin: /([fF][rR]|[rR][fF]|[fF])'''/,
@@ -274,10 +272,10 @@ export default function(hljs) {
       // because both MUST contain a decimal point and so cannot be confused with
       // the interior part of an identifier
       {
-        begin: `(\\b(${digitpart})|(${pointfloat}))[eE][+-]?(${digitpart})[jJ]?(?=${lookahead})`
+        match: `(\\b(${digitpart})|(${pointfloat}))[eE][+-]?(${digitpart})[jJ]?(?=${lookahead})`
       },
       {
-        begin: `(${pointfloat})[jJ]?`
+        match: `(${pointfloat})[jJ]?`
       },
 
       // decinteger, bininteger, octinteger, hexinteger
@@ -287,28 +285,29 @@ export default function(hljs) {
       // decinteger is optionally imaginary
       // https://docs.python.org/3.9/reference/lexical_analysis.html#imaginary-literals
       {
-        begin: `\\b([1-9](_?[0-9])*|0+(_?0)*)[lLjJ]?(?=${lookahead})`
+        match: `\\b([1-9](_?[0-9])*|0+(_?0)*)[lLjJ]?(?=${lookahead})`
       },
       {
-        begin: `\\b0[bB](_?[01])+[lL]?(?=${lookahead})`
+        match: `\\b0[bB](_?[01])+[lL]?(?=${lookahead})`
       },
       {
-        begin: `\\b0[oO](_?[0-7])+[lL]?(?=${lookahead})`
+        match: `\\b0[oO](_?[0-7])+[lL]?(?=${lookahead})`
       },
       {
-        begin: `\\b0[xX](_?[0-9a-fA-F])+[lL]?(?=${lookahead})`
+        match: `\\b0[xX](_?[0-9a-fA-F])+[lL]?(?=${lookahead})`
       },
 
       // imagnumber (digitpart-based)
       // https://docs.python.org/3.9/reference/lexical_analysis.html#imaginary-literals
       {
-        begin: `\\b(${digitpart})[jJ](?=${lookahead})`
+        match: `\\b(${digitpart})[jJ](?=${lookahead})`
       }
     ]
   };
   const COMMENT_TYPE = {
     className: "comment",
     begin: regex.lookahead(/# type:/),
+    relevance: "low",
     end: /$/,
     keywords: KEYWORDS,
     contains: [
@@ -369,13 +368,13 @@ export default function(hljs) {
       NUMBER,
       {
         // very common convention
-        begin: /\bself\b/
+        match: /\bself\b/,
+        relevance: "keyword"
       },
       {
         // eat "if" prior to string so that it won't accidentally be
         // labeled as an f-string
-        beginKeywords: "if",
-        relevance: 0
+        beginKeywords: "if"
       },
       STRING,
       COMMENT_TYPE,
@@ -385,6 +384,7 @@ export default function(hljs) {
           /\bdef/, /\s+/,
           IDENT_RE,
         ],
+        relevance: "keyword",
         scope: {
           1: "keyword",
           3: "title.function"
@@ -407,6 +407,7 @@ export default function(hljs) {
             ],
           }
         ],
+        relevance: "keyword",
         scope: {
           1: "keyword",
           3: "title.class",

@@ -64,10 +64,10 @@ export default function(hljs) {
         className: 'number',
         relevance: 0,
         variants: [
-          { match: '\\b(0[xX][a-fA-F0-9_]+[Lln]?|', relevance: "low" },
-          { match: '0[oO][0-7_]+[Lln]?|', relevance: "low" },
-          { match: '0[bB][01_]+[Lln]?|', relevance: "low" },
-          { match: '[0-9][0-9_]*([Lln]|(\\.[0-9_]*)?([eE][-+]?[0-9_]+)?)?)', }
+          { match: '\\b0[xX][a-fA-F0-9_]+[Lln]?', relevance: "low" },
+          { match: '\\b0[oO][0-7_]+[Lln]?', relevance: "low" },
+          { match: '\\b0[bB][01_]+[Lln]?', relevance: "low" },
+          { match: '\\b[0-9][0-9_]*([Lln]|(\\.[0-9_]*)?([eE][-+]?[0-9_]+)?)?' }
         ]
       },
       { 

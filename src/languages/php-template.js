@@ -13,7 +13,7 @@ export default function(hljs) {
     contains: [
       {
         begin: /<\?(php|=)?/,
-        relevance: 1,
+        relevance: "keyword",
         end: /\?>/,
         subLanguage: 'php',
         contains: [
