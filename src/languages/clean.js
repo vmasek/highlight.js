@@ -59,7 +59,7 @@ export default function(hljs) {
       hljs.QUOTE_STRING_MODE,
       hljs.C_NUMBER_MODE,
       { // relevance booster
-        relevance: 0.1,
+        relevance: "low",
         begin: '->|<-[|:]?|#!?|>>=|\\{\\||\\|\\}|:==|=:|<>' }
     ]
   };

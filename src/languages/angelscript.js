@@ -8,7 +8,7 @@ Website: https://www.angelcode.com/angelscript/
 /** @type LanguageFn */
 export default function(hljs) {
   const builtInTypeMode = {
-    className: 'built_in',
+    className: 'type',
     relevance: "keyword",
     begin: '\\b(void|bool|int8|int16|int32|int64|int|uint8|uint16|uint32|uint64|uint|string|ref|array|double|float|auto|dictionary)'
   };
@@ -19,7 +19,6 @@ export default function(hljs) {
   };
 
   const genericMode = {
-    className: 'keyword',
     begin: '<',
     end: '>',
     contains: [
@@ -33,7 +32,7 @@ export default function(hljs) {
 
   const KEYWORDS = [
     "for",
-    "in|0",
+    "in",
     "break",
     "continue",
     "while",
@@ -52,7 +51,7 @@ export default function(hljs) {
     "not",
     "get|0",
     "in",
-    "inout|10",
+    "inout",
     "out",
     "override",
     "set|0",
@@ -128,7 +127,7 @@ export default function(hljs) {
         illegal: '[;.\\-]',
         contains: [
           { // interface or namespace name
-            className: 'symbol',
+            className: 'title.class',
             begin: '[a-zA-Z0-9_]+'
           }
         ]
@@ -140,14 +139,14 @@ export default function(hljs) {
         illegal: '[;.\\-]',
         contains: [
           { // class name
-            className: 'symbol',
+            className: 'title.class',
             begin: '[a-zA-Z0-9_]+',
             contains: [
               {
                 begin: '[:,]\\s*',
                 contains: [
                   {
-                    className: 'symbol',
+                    className: 'title.class',
                     begin: '[a-zA-Z0-9_]+'
                   }
                 ]

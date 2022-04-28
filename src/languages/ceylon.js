@@ -86,15 +86,14 @@ export default function(hljs) {
     end: /``/,
     keywords: KEYWORDS,
     // this has a bit of a signal given that it's scope to inside of a string
-    relevance: 0.5
+    relevance: "half"
   };
   const EXPRESSIONS = [
     {
       // verbatim string
       className: 'string',
       begin: '"""',
-      end: '"""',
-      relevance: 2
+      end: '"""'
     },
     {
       // string literal or template
@@ -112,8 +111,12 @@ export default function(hljs) {
     {
       // numeric literal
       className: 'number',
-      begin: '#[0-9a-fA-F_]+|\\$[01_]+|[0-9_]+(?:\\.[0-9_](?:[eE][+-]?\\d+)?)?[kMGTPmunpf]?',
-      relevance: 0
+      relevance: 0,
+      variants: [
+        { match: /#[0-9a-fA-F_]+/, relevance: "low" },
+        { match: /\$[01_]+/, relevance: "low" },
+        { match: /[0-9_]+(?:\.[0-9_](?:[eE][+-]?\d+)?)?[kMGTPmunpf]?/ }
+      ]
     }
   ];
   SUBST.contains = EXPRESSIONS;
@@ -124,7 +127,10 @@ export default function(hljs) {
       keyword: KEYWORDS.concat(DECLARATION_MODIFIERS),
       meta: DOCUMENTATION
     },
-    illegal: '\\$[^01]|#[^0-9a-fA-F]',
+    illegal: [
+      /\$[^01]/,
+      /#[^0-9a-fA-F]/
+    ],
     contains: [
       hljs.C_LINE_COMMENT_MODE,
       hljs.COMMENT('/\\*', '\\*/', { contains: [ 'self' ] }),
@@ -132,7 +138,8 @@ export default function(hljs) {
         // compiler annotation
         className: 'meta',
         begin: '@[a-z]\\w*(?::"[^"]*")?'
-      }
-    ].concat(EXPRESSIONS)
+      },
+      ...EXPRESSIONS
+    ]
   };
 }
