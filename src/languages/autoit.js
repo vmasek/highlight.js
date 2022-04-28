@@ -79,8 +79,7 @@ export default function(hljs) {
     keywords: { keyword: DIRECTIVES },
     contains: [
       {
-        begin: /\\\n/,
-        relevance: 0
+        begin: /\\\n/
       },
       {
         beginKeywords: 'include',

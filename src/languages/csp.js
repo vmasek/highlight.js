@@ -3,8 +3,6 @@ Language: CSP
 Description: Content Security Policy definition highlighting
 Author: Taras <oxdef@oxdef.info>
 Website: https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
-
-vim: ts=2 sw=2 st=2
 */
 
 /** @type LanguageFn */
@@ -41,13 +39,13 @@ export default function(hljs) {
     contains: [
       {
         className: 'string',
-        begin: "'",
-        end: "'"
+        begin: /'/,
+        end: /'/
       },
       {
         className: 'attribute',
-        begin: '^Content',
-        end: ':',
+        begin: /^Content/,
+        end: /:/,
         excludeEnd: true
       }
     ]

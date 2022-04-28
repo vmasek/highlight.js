@@ -55,8 +55,7 @@ export default function(hljs) {
       { begin: '\\b(0b[01\']+)' },
       { begin: '(-?)\\b([\\d\']+(\\.[\\d\']*)?|\\.[\\d\']+)((ll|LL|l|L)(u|U)?|(u|U)(ll|LL|l|L)?|f|F|b|B)' },
       { begin: '(-?)(\\b0[xX][a-fA-F0-9\']+|(\\b[\\d\']+(\\.[\\d\']*)?|\\.[\\d\']+)([eE][-+]?[\\d\']+)?)' }
-    ],
-    relevance: 0
+    ]
   };
 
   const PREPROCESSOR = {
@@ -68,8 +67,7 @@ export default function(hljs) {
         + 'pragma _Pragma ifdef ifndef include' },
     contains: [
       {
-        begin: /\\\n/,
-        relevance: 0
+        begin: /\\\n/
       },
       hljs.inherit(STRINGS, { className: 'string' }),
       {
@@ -83,8 +81,7 @@ export default function(hljs) {
 
   const TITLE_MODE = {
     className: 'title',
-    begin: regex.optional(NAMESPACE_RE) + hljs.IDENT_RE,
-    relevance: 0
+    begin: regex.optional(NAMESPACE_RE) + hljs.IDENT_RE
   };
 
   const FUNCTION_TITLE = regex.optional(NAMESPACE_RE) + hljs.IDENT_RE + '\\s*\\(';
@@ -382,7 +379,6 @@ export default function(hljs) {
 
   const FUNCTION_DISPATCH = {
     className: 'function.dispatch',
-    relevance: 0,
     keywords: {
       // Only for relevance, not highlighting.
       _hint: FUNCTION_HINTS },
@@ -431,11 +427,9 @@ export default function(hljs) {
         begin: /\(/,
         end: /\)/,
         keywords: CPP_KEYWORDS,
-        contains: EXPRESSION_CONTAINS.concat([ 'self' ]),
-        relevance: 0
+        contains: EXPRESSION_CONTAINS.concat([ 'self' ])
       }
-    ]),
-    relevance: 0
+    ])
   };
 
   const FUNCTION_DECLARATION = {
@@ -449,20 +443,17 @@ export default function(hljs) {
     contains: [
       { // to prevent it from being confused as the function title
         begin: DECLTYPE_AUTO_RE,
-        keywords: CPP_KEYWORDS,
-        relevance: 0
+        keywords: CPP_KEYWORDS
       },
       {
         begin: FUNCTION_TITLE,
         returnBegin: true,
-        contains: [ TITLE_MODE ],
-        relevance: 0
+        contains: [ TITLE_MODE ]
       },
       // needed because we do not have look-behind on the below rule
       // to prevent it from grabbing the final : in a :: pair
       {
-        begin: /::/,
-        relevance: 0
+        begin: /::/
       },
       // initializers
       {
@@ -476,7 +467,6 @@ export default function(hljs) {
       // allow for multiple declarations, e.g.:
       // extern void f(int), g(char);
       {
-        relevance: 0,
         match: /,/
       },
       {
@@ -484,7 +474,6 @@ export default function(hljs) {
         begin: /\(/,
         end: /\)/,
         keywords: CPP_KEYWORDS,
-        relevance: 0,
         contains: [
           C_LINE_COMMENT_MODE,
           hljs.C_BLOCK_COMMENT_MODE,
@@ -496,7 +485,6 @@ export default function(hljs) {
             begin: /\(/,
             end: /\)/,
             keywords: CPP_KEYWORDS,
-            relevance: 0,
             contains: [
               'self',
               C_LINE_COMMENT_MODE,
@@ -556,7 +544,8 @@ export default function(hljs) {
             /\s+/,
             /\w+/
           ],
-          className: {
+          relevance: "keyword",
+          scope: {
             1: 'keyword',
             3: 'title.class'
           }

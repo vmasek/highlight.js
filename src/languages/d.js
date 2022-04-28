@@ -137,8 +137,7 @@ export default function(hljs) {
    * @type {Object}
    */
   const D_ESCAPE_SEQUENCE = {
-    begin: escape_sequence_re,
-    relevance: 0
+    begin: escape_sequence_re
   };
 
   /**
@@ -162,7 +161,7 @@ export default function(hljs) {
     className: 'string',
     begin: '[rq]"',
     end: '"[cwd]?',
-    relevance: 1
+    relevance: "low"
   };
 
   /**
@@ -184,7 +183,7 @@ export default function(hljs) {
   const D_HEX_STRING_MODE = {
     className: 'string',
     begin: 'x"[\\da-fA-F\\s\\n\\r]*"[cwd]?',
-    relevance: 1
+    relevance: "low"
   };
 
   /**
@@ -195,7 +194,8 @@ export default function(hljs) {
   const D_TOKEN_STRING_MODE = {
     className: 'string',
     begin: 'q"\\{',
-    end: '\\}"'
+    end: '\\}"',
+    relevance: "low"
   };
 
   /**
@@ -217,8 +217,7 @@ export default function(hljs) {
   const D_SPECIAL_TOKEN_SEQUENCE_MODE = {
     className: 'meta',
     begin: '#(line)',
-    end: '$',
-    relevance: 5
+    end: '$'
   };
 
   /**
