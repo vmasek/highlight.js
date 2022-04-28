@@ -230,17 +230,17 @@ export default function(hljs) {
   };
   const SYMBOL = {
     className: 'symbol',
-    relevance: 1,
+    relevance: "keyword",
     begin: '\\$(datastore|feature|layer|map|measure|sourcefeature|sourcelayer|targetfeature|targetlayer|value|view)+'
   };
   const NUMBER = {
     className: 'number',
+    relevance: 0,
     variants: [
-      { begin: '\\b(0[bB][01]+)' },
-      { begin: '\\b(0[oO][0-7]+)' },
+      { begin: '\\b(0[bB][01]+)', relevance: "low" },
+      { begin: '\\b(0[oO][0-7]+)', relevance: "low" },
       { begin: hljs.C_NUMBER_RE }
-    ],
-    relevance: 0
+    ]
   };
   const SUBST = {
     className: 'subst',
@@ -284,19 +284,10 @@ export default function(hljs) {
       NUMBER,
       { // object attr container
         begin: /[{,]\s*/,
-        relevance: 0,
         contains: [
           {
-            begin: IDENT_RE + '\\s*:',
-            returnBegin: true,
-            relevance: 0,
-            contains: [
-              {
-                className: 'attr',
-                begin: IDENT_RE,
-                relevance: 0
-              }
-            ]
+            scope: "attr",
+            begin: IDENT_RE + '(?=\\s*:)'
           }
         ]
       },
