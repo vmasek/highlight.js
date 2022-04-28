@@ -94,14 +94,11 @@ export default function(hljs) {
   ];
   const KNOWN_SHEBANG = hljs.SHEBANG({
     binary: `(${SH_LIKE_SHELLS.join("|")})`,
-    relevance: 9
+    relevance: "critical"
   });
   const FUNCTION = {
-    className: 'function',
-    begin: /\w[\w\d_]*\s*\(\s*\)\s*\{/,
-    returnBegin: true,
-    contains: [ hljs.inherit(hljs.TITLE_MODE, { begin: /\w[\w\d_]*/ }) ],
-    relevance: 0
+    scope: 'title.function',
+    begin: /\w[\w\d_]*(?=\s*\(\s*\)\s*\{)/
   };
 
   const KEYWORDS = [
@@ -149,6 +146,15 @@ export default function(hljs) {
     "umask",
     "unset"
   ];
+
+  const COMPARISONS = [
+    "-eq",
+    "-ne",
+    "-lt",
+    "-le",
+    "-gt",
+    "-ge"
+  ]
 
   const BASH_BUILT_INS = [
     "alias",
@@ -351,6 +357,12 @@ export default function(hljs) {
     "yes"
   ];
 
+  const COMPARISON = {
+    scope:"operator",
+    match: regex.either(...COMPARISONS),
+    relevance: "low"
+  }
+
   return {
     name: 'Bash',
     aliases: [ 'sh' ],
@@ -379,7 +391,8 @@ export default function(hljs) {
       QUOTE_STRING,
       ESCAPED_QUOTE,
       APOS_STRING,
-      VAR
+      VAR,
+      COMPARISON
     ]
   };
 }
