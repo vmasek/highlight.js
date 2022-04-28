@@ -77,6 +77,7 @@ export default function(hljs) {
       /[a-zA-Z_][\w@]*/,
       /\s*/
     ],
+    relevance: "keyword",
     scope: {
       1: "keyword",
       3: "title.function"
@@ -119,7 +120,7 @@ export default function(hljs) {
       /.*/,
       /$/
     ],
-    relevance: 3,
+    relevance: "double",
     scope: {
       1: "keyword",
       3: "type",
@@ -130,8 +131,7 @@ export default function(hljs) {
 
   const PROPERTY = {
     match: /[\w]+(?=\=)/,
-    scope: "attribute",
-    relevance: 0
+    scope: "attribute"
   };
 
   return {

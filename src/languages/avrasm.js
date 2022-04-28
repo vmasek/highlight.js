@@ -49,14 +49,15 @@ export default function(hljs) {
       hljs.BINARY_NUMBER_MODE, // 0b...
       {
         className: 'number',
+        relevance: "low",
         begin: '\\b(\\$[a-zA-Z0-9]+|0o[0-7]+)' // $..., 0o...
       },
       hljs.QUOTE_STRING_MODE,
       {
         className: 'string',
-        begin: '\'',
-        end: '[^\\\\]\'',
-        illegal: '[^\\\\][^\']'
+        begin: /'/,
+        end: /[^\\]'/,
+        illegal: /[\\][^']/
       },
       {
         className: 'symbol',

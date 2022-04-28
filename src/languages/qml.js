@@ -81,11 +81,9 @@ export default function(hljs) {
         className: 'attribute',
         begin: QML_IDENT_RE,
         end: '\\s*:',
-        excludeEnd: true,
-        relevance: 0
+        excludeEnd: true
       }
-    ],
-    relevance: 0
+    ]
   };
 
   // Find QML object. A QML object is a QML identifier followed by { and ends at the matching }.
@@ -94,7 +92,6 @@ export default function(hljs) {
     begin: regex.concat(QML_IDENT_RE, /\s*\{/),
     end: /\{/,
     returnBegin: true,
-    relevance: 0,
     contains: [ hljs.inherit(hljs.TITLE_MODE, { begin: QML_IDENT_RE }) ]
   };
 
@@ -127,12 +124,12 @@ export default function(hljs) {
       hljs.C_BLOCK_COMMENT_MODE,
       {
         className: 'number',
+        relevance: 0,
         variants: [
-          { begin: '\\b(0[bB][01]+)' },
-          { begin: '\\b(0[oO][0-7]+)' },
+          { begin: '\\b(0[bB][01]+)', relevance: "low" },
+          { begin: '\\b(0[oO][0-7]+)', relevance: "low" },
           { begin: hljs.C_NUMBER_RE }
-        ],
-        relevance: 0
+        ]
       },
       { // "value" container
         begin: '(' + hljs.RE_STARTERS_RE + '|\\b(case|return|throw)\\b)\\s*',

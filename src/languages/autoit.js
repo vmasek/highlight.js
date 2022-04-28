@@ -37,8 +37,8 @@ export default function(hljs) {
 
   const COMMENT = { variants: [
     hljs.COMMENT(';', '$', { relevance: 0 }),
-    hljs.COMMENT('#cs', '#ce'),
-    hljs.COMMENT('#comments-start', '#comments-end')
+    hljs.COMMENT('#cs', '#ce', { relevance: "low" }),
+    hljs.COMMENT('#comments-start', '#comments-end', { relevance: "half" })
   ] };
 
   const VARIABLE = { begin: '\\$[A-z0-9_]+' };
@@ -51,8 +51,7 @@ export default function(hljs) {
         end: /"/,
         contains: [
           {
-            begin: /""/,
-            relevance: 0
+            begin: /""/
           }
         ]
       },
@@ -61,8 +60,7 @@ export default function(hljs) {
         end: /'/,
         contains: [
           {
-            begin: /''/,
-            relevance: 0
+            begin: /''/
           }
         ]
       }
@@ -102,8 +100,7 @@ export default function(hljs) {
                 end: /"/,
                 contains: [
                   {
-                    begin: /""/,
-                    relevance: 0
+                    begin: /""/
                   }
                 ]
               },
@@ -112,8 +109,7 @@ export default function(hljs) {
                 end: /'/,
                 contains: [
                   {
-                    begin: /''/,
-                    relevance: 0
+                    begin: /''/
                   }
                 ]
               }

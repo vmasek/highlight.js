@@ -14,38 +14,38 @@ export default function(hljs) {
       { begin: /\$\{(.*?)\}/ }
     ]
   };
-  const KEYWORDS = 'BEGIN END if else while do for in break continue delete next nextfile function func exit|10';
+  const KEYWORDS = 'BEGIN END if else while do for in break continue delete next nextfile function func exit';
   const STRING = {
     className: 'string',
     contains: [ hljs.BACKSLASH_ESCAPE ],
     variants: [
       {
         begin: /(u|b)?r?'''/,
-        end: /'''/,
-        relevance: 2
+        end: /'''/
       },
       {
         begin: /(u|b)?r?"""/,
-        end: /"""/,
-        relevance: 2
+        end: /"""/
       },
       {
         begin: /(u|r|ur)'/,
         end: /'/,
-        relevance: 2
+        relevance: "low"
       },
       {
         begin: /(u|r|ur)"/,
         end: /"/,
-        relevance: 2
+        relevance: "low"
       },
       {
         begin: /(b|br)'/,
-        end: /'/
+        end: /'/,
+        relevance: "low"
       },
       {
         begin: /(b|br)"/,
-        end: /"/
+        end: /"/,
+        relevance: "low"
       },
       hljs.APOS_STRING_MODE,
       hljs.QUOTE_STRING_MODE
@@ -53,7 +53,7 @@ export default function(hljs) {
   };
   return {
     name: 'Awk',
-    keywords: { keyword: KEYWORDS },
+    keywords: KEYWORDS,
     contains: [
       VARIABLE,
       STRING,

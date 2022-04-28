@@ -9,6 +9,7 @@ Category: common
 export default function(hljs) {
   const API_CLASS = {
     className: 'built_in',
+    relevance: "half",
     begin: '\\b(AV|CA|CF|CG|CI|CL|CM|CN|CT|MK|MP|MTK|MTL|NS|SCN|SK|UI|WK|XC)\\w+'
   };
   const IDENTIFIER_RE = /[a-zA-Z@][a-zA-Z0-9_]*/;
@@ -235,7 +236,6 @@ export default function(hljs) {
         ]
       },
       {
-        className: 'class',
         begin: '(' + CLASS_KEYWORDS.keyword.join('|') + ')\\b',
         end: /(\{|$)/,
         excludeEnd: true,
@@ -243,6 +243,7 @@ export default function(hljs) {
         contains: [ hljs.UNDERSCORE_TITLE_MODE ]
       },
       {
+        // guard
         begin: '\\.' + hljs.UNDERSCORE_IDENT_RE,
         relevance: 0
       }

@@ -618,7 +618,6 @@ export default function(hljs) {
 
   const FUNCTION_CALL = {
     begin: regex.concat(/\b/, regex.either(...FUNCTIONS), /\s*\(/),
-    relevance: 0,
     keywords: { built_in: FUNCTIONS }
   };
 
@@ -655,7 +654,6 @@ export default function(hljs) {
     contains: [
       {
         begin: regex.either(...COMBOS),
-        relevance: 0,
         keywords: {
           $pattern: /[\w\.]+/,
           keyword: KEYWORDS.concat(COMBOS),
@@ -665,6 +663,7 @@ export default function(hljs) {
       },
       {
         className: "type",
+        relevance: "double",
         begin: regex.either(...MULTI_WORD_TYPES)
       },
       FUNCTION_CALL,
