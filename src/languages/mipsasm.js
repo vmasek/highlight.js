@@ -63,25 +63,23 @@ export default function(hljs) {
       {
         className: 'string',
         begin: '\'',
-        end: '[^\\\\]\'',
-        relevance: 0
+        end: '[^\\\\]\''
       },
       {
         className: 'title',
         begin: '\\|',
         end: '\\|',
-        illegal: '\\n',
-        relevance: 0
+        illegal: '\\n'
       },
       {
         className: 'number',
+        relevance: 0,
         variants: [
           { // hex
-            begin: '0x[0-9a-f]+' },
+            begin: '0x[0-9a-f]+', relevance: "low" },
           { // bare number
             begin: '\\b-?\\d+' }
-        ],
-        relevance: 0
+        ]
       },
       {
         className: 'symbol',
@@ -93,7 +91,7 @@ export default function(hljs) {
           { // number local label reference (backwards, forwards)
             begin: '[0-9]+[bf]' }
         ],
-        relevance: 0
+        relevance: "low"
       }
     ],
     // forward slashes are not allowed

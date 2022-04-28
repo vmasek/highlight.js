@@ -53,28 +53,25 @@ export default function(hljs) {
       },
       { /* module or constructor */
         className: 'type',
-        begin: '\\b[A-Z][\\w\']*',
-        relevance: 0
+        begin: '\\b[A-Z][\\w\']*'
       },
       { /* don't color identifiers, but safely catch all identifiers with ' */
-        begin: '[a-z_]\\w*\'[\\w\']*',
-        relevance: 0
+        begin: '[a-z_]\\w*\'[\\w\']*'
       },
-      hljs.inherit(hljs.APOS_STRING_MODE, {
-        className: 'string',
-        relevance: 0
-      }),
+      hljs.APOS_STRING_MODE,
       hljs.inherit(hljs.QUOTE_STRING_MODE, { illegal: null }),
       {
         className: 'number',
-        begin:
-          '\\b(0[xX][a-fA-F0-9_]+[Lln]?|'
-          + '0[oO][0-7_]+[Lln]?|'
-          + '0[bB][01_]+[Lln]?|'
-          + '[0-9][0-9_]*([Lln]|(\\.[0-9_]*)?([eE][-+]?[0-9_]+)?)?)',
-        relevance: 0
+        relevance: 0,
+        variants: [
+          { match: '\\b(0[xX][a-fA-F0-9_]+[Lln]?|', relevance: "low" },
+          { match: '0[oO][0-7_]+[Lln]?|', relevance: "low" },
+          { match: '0[bB][01_]+[Lln]?|', relevance: "low" },
+          { match: '[0-9][0-9_]*([Lln]|(\\.[0-9_]*)?([eE][-+]?[0-9_]+)?)?)', }
+        ]
       },
-      { begin: /->/ // relevance booster
+      { 
+        begin: /->/ // relevance booster
       }
     ]
   };

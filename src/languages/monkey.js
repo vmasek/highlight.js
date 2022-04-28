@@ -10,7 +10,7 @@ export default function(hljs) {
     className: 'number',
     relevance: 0,
     variants: [
-      { begin: '[$][a-fA-F0-9]+' },
+      { begin: '[$][a-fA-F0-9]+', relevance: "low" },
       hljs.NUMBER_MODE
     ]
   };
@@ -22,7 +22,7 @@ export default function(hljs) {
         hljs.UNDERSCORE_IDENT_RE,
       ] },
     ],
-    relevance: 1,
+    relevance: "keyword",
     scope: {
       1: "keyword",
       3: "title.function"
@@ -36,7 +36,7 @@ export default function(hljs) {
         hljs.UNDERSCORE_IDENT_RE,
       ] },
     ],
-    relevance: 1,
+    relevance: "keyword",
     scope: {
       1: "keyword",
       3: "title.class"
@@ -147,16 +147,12 @@ export default function(hljs) {
     illegal: /\/\*/,
     contains: [
       hljs.COMMENT('#rem', '#end'),
-      hljs.COMMENT(
-        "'",
-        '$',
-        { relevance: 0 }
-      ),
+      hljs.COMMENT("'",'$'),
       FUNC_DEFINITION,
       CLASS_DEFINITION,
       {
         className: 'variable.language',
-        relevance: 1,
+        relevance: "keyword",
         begin: /\b(self|super)\b/
       },
       {
@@ -170,7 +166,7 @@ export default function(hljs) {
           /^\s*/,
           /strict\b/
         ],
-        relevance: 1,
+        relevance: "keyword",
         scope: { 2: "meta" }
       },
       {

@@ -63,6 +63,7 @@ export default function(hljs) {
   );
   const LITERAL = {
     className: 'literal',
+    relevance: "keyword",
     begin: /\b([Tt]rue|[Ff]alse|nil|None)\b/
   };
   const COLLECTION = {
@@ -84,12 +85,10 @@ export default function(hljs) {
     end: '\\)'
   };
   const BODY = {
-    endsWithParent: true,
-    relevance: 0
+    endsWithParent: true
   };
   const NAME = {
     className: 'name',
-    relevance: 0,
     keywords: keywords,
     begin: SYMBOL_RE,
     starts: BODY

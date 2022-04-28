@@ -44,11 +44,8 @@ export default function(hljs) {
   };
 
   const COMMENT = hljs.COMMENT('#', '$');
-
   const IDENT_RE = '([A-Za-z_]|::)(\\w|::)*';
-
   const TITLE = hljs.inherit(hljs.TITLE_MODE, { begin: IDENT_RE });
-
   const VARIABLE = {
     className: 'variable',
     begin: '\\$' + IDENT_RE
@@ -112,7 +109,6 @@ export default function(hljs) {
             begin: /\{/,
             end: /\}/,
             keywords: PUPPET_KEYWORDS,
-            relevance: 0,
             contains: [
               STRING,
               COMMENT,
@@ -129,14 +125,14 @@ export default function(hljs) {
               },
               {
                 className: 'number',
+                // TODO: split
                 begin: '(\\b0[0-7_]+)|(\\b0x[0-9a-fA-F_]+)|(\\b[1-9][0-9_]*(\\.[0-9_]+)?)|[0_]\\b',
                 relevance: 0
               },
               VARIABLE
             ]
           }
-        ],
-        relevance: 0
+        ]
       }
     ]
   };

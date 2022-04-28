@@ -3082,8 +3082,7 @@ export default function(hljs) {
   // Токены
   const DOCTAGS = {
     className: "doctag",
-    begin: "\\b(?:TODO|DONE|BEGIN|END|STUB|CHG|FIXME|NOTE|BUG|XXX)\\b",
-    relevance: 0
+    begin: "\\b(?:TODO|DONE|BEGIN|END|STUB|CHG|FIXME|NOTE|BUG|XXX)\\b"
   };
 
   // Однострочный комментарий
@@ -3091,7 +3090,6 @@ export default function(hljs) {
     className: "comment",
     begin: "//",
     end: "$",
-    relevance: 0,
     contains: [
       hljs.PHRASAL_WORDS_MODE,
       DOCTAGS
@@ -3103,7 +3101,6 @@ export default function(hljs) {
     className: "comment",
     begin: "/\\*",
     end: "\\*/",
-    relevance: 0,
     contains: [
       hljs.PHRASAL_WORDS_MODE,
       DOCTAGS
@@ -3128,8 +3125,7 @@ export default function(hljs) {
   // methods : методы
   const METHODS = {
     begin: "\\.\\s*" + hljs.UNDERSCORE_IDENT_RE,
-    keywords: KEYWORDS,
-    relevance: 0
+    keywords: KEYWORDS
   };
 
   // type : встроенные типы
@@ -3145,7 +3141,6 @@ export default function(hljs) {
     className: "variable",
     keywords: KEYWORDS,
     begin: UNDERSCORE_IDENT_RE,
-    relevance: 0,
     contains: [
       TYPES,
       METHODS

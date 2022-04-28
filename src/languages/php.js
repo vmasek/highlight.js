@@ -29,10 +29,10 @@ export default function(hljs) {
   const PREPROCESSOR = {
     scope: 'meta',
     variants: [
-      { begin: /<\?php/, relevance: 9 }, // boost for obvious PHP
+      { begin: /<\?php/, relevance: "critical" }, // boost for obvious PHP
       { begin: /<\?=/ },
       // less relevant per PSR-1 which says not to use short-tags
-      { begin: /<\?/, relevance: 0.1 },
+      { begin: /<\?/, relevance: "low" },
       { begin: /\?>/ } // end php tag
     ]
   };
@@ -68,14 +68,14 @@ export default function(hljs) {
   };
   const NUMBER = {
     scope: 'number',
+    relevance: 0,
     variants: [
-      { begin: `\\b0[bB][01]+(?:_[01]+)*\\b` }, // Binary w/ underscore support
-      { begin: `\\b0[oO][0-7]+(?:_[0-7]+)*\\b` }, // Octals w/ underscore support
-      { begin: `\\b0[xX][\\da-fA-F]+(?:_[\\da-fA-F]+)*\\b` }, // Hex w/ underscore support
+      { begin: `\\b0[bB][01]+(?:_[01]+)*\\b`, relevance: "low" }, // Binary w/ underscore support
+      { begin: `\\b0[oO][0-7]+(?:_[0-7]+)*\\b`, relevance: "low" }, // Octals w/ underscore support
+      { begin: `\\b0[xX][\\da-fA-F]+(?:_[\\da-fA-F]+)*\\b`, relevance: "low" }, // Hex w/ underscore support
       // Decimals w/ underscore support, with optional fragments and scientific exponent (e) suffix.
       { begin: `(?:\\b\\d+(?:_\\d+)*(\\.(?:\\d+(?:_\\d+)*))?|\\B\\.\\d+)(?:[eE][+-]?\\d+)?` }
-    ],
-    relevance: 0
+    ]
   };
   const LITERALS = [
     "false",
@@ -324,6 +324,7 @@ export default function(hljs) {
         regex.concat("(?!", normalizeKeywords(BUILT_INS).join("\\b|"), "\\b)"),
         PASCAL_CASE_CLASS_NAME_RE,
       ],
+      relevance: "keyword", // new
       scope: {
         1: "keyword",
         4: "title.class",
@@ -349,6 +350,7 @@ export default function(hljs) {
         /::/,
         /class/,
       ],
+      relevance: "keyword",
       scope: { 2: "variable.language", },
     },
     {
@@ -381,6 +383,7 @@ export default function(hljs) {
         /::/,
         /class/,
       ],
+      relevance: "keyword",
       scope: {
         1: "title.class",
         3: "variable.language",
@@ -393,7 +396,6 @@ export default function(hljs) {
     match: regex.concat(IDENT_RE, regex.lookahead(':'), regex.lookahead(/(?!::)/)),
   };
   const PARAMS_MODE = {
-    relevance: 0,
     begin: /\(/,
     end: /\)/,
     keywords: KEYWORDS,
@@ -408,7 +410,6 @@ export default function(hljs) {
     ],
   };
   const FUNCTION_INVOKE = {
-    relevance: 0,
     match: [
       /\b/,
       // to prevent keywords from being confused as the function title
@@ -502,6 +503,7 @@ export default function(hljs) {
       PREPROCESSOR,
       {
         scope: 'variable.language',
+        relevance: "keyword",
         match: /\$this\b/
       },
       VARIABLE,
@@ -513,6 +515,7 @@ export default function(hljs) {
           /\s/,
           IDENT_RE,
         ],
+        relevance: "keyword",
         scope: {
           1: "keyword",
           3: "variable.constant",
@@ -520,8 +523,6 @@ export default function(hljs) {
       },
       CONSTRUCTOR_CALL,
       {
-        scope: 'function',
-        relevance: 0,
         beginKeywords: 'fn function',
         end: /[;{]/,
         excludeEnd: true,
@@ -563,7 +564,6 @@ export default function(hljs) {
             illegal: /[:($"]/
           }
         ],
-        relevance: 0,
         end: /\{/,
         excludeEnd: true,
         contains: [
@@ -576,19 +576,17 @@ export default function(hljs) {
       // element to be treated as its own *individual* title
       {
         beginKeywords: 'namespace',
-        relevance: 0,
         end: ';',
         illegal: /[.']/,
         contains: [ hljs.inherit(hljs.UNDERSCORE_TITLE_MODE, { scope: "title.class" }) ]
       },
       {
         beginKeywords: 'use',
-        relevance: 0,
         end: ';',
         contains: [
-          // TODO: title.function vs title.class
           {
             match: /\b(as|const|function)\b/,
+            relevance: "keyword",
             scope: "keyword"
           },
           // TODO: could be title.class or title.function
