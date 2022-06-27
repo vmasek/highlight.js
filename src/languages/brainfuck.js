@@ -18,6 +18,7 @@ export default function(hljs) {
         /[^\[\]\.,\+\-<> \r\n]/,
         /[\[\]\.,\+\-<> \r\n]/,
         {
+          relevance: 0,
           contains: [
             {
               match: /[ ]+[^\[\]\.,\+\-<> \r\n]/
