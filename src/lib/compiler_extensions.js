@@ -96,6 +96,7 @@ export function compileMatch(mode, _parent) {
 
 /** @type {Record<string,number> } */
 const RELEVANCE_LEVELS = {
+  none: 0,
   baseline: 0.05,
   low: 0.1,
   minor: 0.5,
