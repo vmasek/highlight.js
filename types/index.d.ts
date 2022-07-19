@@ -29,12 +29,54 @@ declare module 'highlight.js' {
     }
 
     interface PublicApi {
-        highlight: (codeOrLanguageName: string, optionsOrCode: string | HighlightOptions, ignoreIllegals?: boolean) => HighlightResult
+        /**
+         * @deprecated Use highlight(code, { language, ignoreIllegals }) instead.
+         * @see docs - https://highlightjs.readthedocs.io/en/latest/api.html#highlight
+         * @see v11 upgrade - https://github.com/highlightjs/highlight.js/blob/main/VERSION_11_UPGRADE.md
+         */
+        highlight: (language: string, code: string, ignoreIllegals?: boolean) => HighlightResult
+        highlight: (code: string, options: HighlightOptions) => HighlightResult
         highlightAuto: (code: string, languageSubset?: string[]) => AutoHighlightResult
+        /**
+         * @deprecated Use highlightElement() instead. 
+         * Will be removed in version 12.0
+         * @see docs - https://highlightjs.readthedocs.io/en/latest/api.html#highlight-element
+         * @see v11 upgrade - https://github.com/highlightjs/highlight.js/blob/main/VERSION_11_UPGRADE.md
+         */
         highlightBlock: (element: HTMLElement) => void
         highlightElement: (element: HTMLElement) => void
         configure: (options: Partial<HLJSOptions>) => void
+        /**
+         * @deprecated Use highlightAll() instead.
+         * 
+         * The old functions are now simply aliases of highlightAll(). 
+         * The new function may be called before or after the DOM is loaded 
+         * and should do the correct thing in all cases,
+         * replacing the need for the previous individual functions.
+         * 
+         * Note: highlightAll() does not guard against calling itself repeatedly as the previous functions did. 
+         * Your code should be careful to avoid doing this.
+         * 
+         * Will be removed in version 12.0
+         * 
+         * @see v11 upgrade - https://github.com/highlightjs/highlight.js/blob/main/VERSION_11_UPGRADE.md
+         */
         initHighlighting: () => void
+        /**
+         * @deprecated Use highlightAll() instead.
+         * 
+         * The old functions are now simply aliases of highlightAll(). 
+         * The new function may be called before or after the DOM is loaded 
+         * and should do the correct thing in all cases,
+         * replacing the need for the previous individual functions.
+         * 
+         * Note: highlightAll() does not guard against calling itself repeatedly as the previous functions did. 
+         * Your code should be careful to avoid doing this.
+         * 
+         * Will be removed in version 12.0
+         * 
+         * @see v11 upgrade - https://github.com/highlightjs/highlight.js/blob/main/VERSION_11_UPGRADE.md
+         */
         initHighlightingOnLoad: () => void
         highlightAll: () => void
         registerLanguage: (languageName: string, language: LanguageFn) => void
